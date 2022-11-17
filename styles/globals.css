@@ -77,9 +77,9 @@ a {
 
 
 
-/* .md\:ml-64 {
+.md\:ml-64 {
   margin-left: 16rem;
-} */
+}
 
 
 
@@ -87,7 +87,8 @@ a {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
-  -ms-overflow-style: none; 
-  scrollbar-width: none;  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

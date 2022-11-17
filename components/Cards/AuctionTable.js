@@ -6,21 +6,32 @@ import { publicRequest } from "utils/requestMethods";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import Link from "next/link";
 
-export default function NFTTable({ color }) {
-  const [data, setData] = useState(null)
+export default function ActionTable({ color }) {
   const [isLoading, setLoading] = useState(false)
-  const tableHeaderHigh = ["NFT Name", "Owner", "Start Price", "Winning Bid", "Start Date", "End Date", "Status", "Action"];
-  const tableHeaderDec = ["NFT Name", "Owner", "Start Price", "End Price", "Start Date", "End Date", "Status", "Action"];
+  const tableHeaderHigh = ["NFT Name", "Owner", "Start Price", "Winning Bid", "Start Date", "End Date", "Status", "Block"];
+  const tableHeaderDec = ["NFT Name", "Owner", "Start Price", "End Price", "Start Date", "End Date", "Status", "Block"];
   const [auctions, setAuctions] = useState([])
 
-  useEffect(() => {
-    setLoading(true)
-    publicRequest.get("admin/auctions").then((res) => {
+  function getAuctions() {
+    setLoading(true);
+    publicRequest.get("admin/auction").then((res) => {
       setAuctions(res.data);
-      setLoading(false)
+      setLoading(false);
+    }).catch((err) => {
+      console.log(err);
     });
+  }
+  useEffect(() => {
+    getAuctions();
   }, [])
-
+  function blockUnBlockHandler(auction){
+    publicRequest.put(`admin/auction/${auction._id}`, { access: !auction.access })
+        .then((res) => {
+          getAuctions();
+        }).catch((err) => {
+          console.log(err);
+        })
+  }
   if (isLoading) return <p>Loading...</p>
   if (!auctions) return <p>No Auction Data</p>
   return (
@@ -97,8 +108,14 @@ export default function NFTTable({ color }) {
                       {auction.status}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                      <TableDropdown />
-                    </td>
+                    <button
+                      className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => blockUnBlockHandler(auction)}
+                      >
+                      {auction.access ? "Block" : "Unblock"}
+                    </button>
+                  </td>
                   </tr>
               })}
 
@@ -168,8 +185,14 @@ export default function NFTTable({ color }) {
                       {auction.status}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                      <TableDropdown />
-                    </td>
+                    <button
+                      className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => blockUnBlockHandler(auction)}
+                      >
+                      {auction.access ? "Block" : "Unblock"}
+                    </button>
+                  </td>
                   </tr>
               })}
 

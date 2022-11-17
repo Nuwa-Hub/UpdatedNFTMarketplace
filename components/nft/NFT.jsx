@@ -11,7 +11,7 @@ import { getNFTByNftId, updateNFTByNFTId } from "redux/actions/NFTAction";
 import HighestBidModal from "./HighestBidModal";
 import BuyNowModal from "./BuyNowModal";
 import { publicRequest } from "utils/requestMethods";
-import { addFavourite, deleteFavourite } from "redux/actions/FavouriteAction";
+import { addFavourite, deleteFavourite, getAllFavouritesByUserId } from "redux/actions/FavouriteAction";
 
 const Nft = () => {
   const [message, updateMessage] = useState("");
@@ -39,6 +39,7 @@ const Nft = () => {
         setNFT(res.data);
       });
     }
+    user?._id && getAllFavouritesByUserId(distpatch, user?._id);
   }, [distpatch, nft_id]);
 
   //get relevent nft by NFT array
@@ -225,8 +226,10 @@ const Nft = () => {
   }
   //console.log(buy)
   //end of the nft blockchain ++++++++++++++++++++++
+ 
 
   //add favourite
+
   const handleFavorite = () => {
     if (!favorite) {
       setFavorite(true);
