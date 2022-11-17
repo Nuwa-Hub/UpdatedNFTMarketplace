@@ -162,7 +162,7 @@ const Nft = () => {
       };
       updateNFTByNFTId(distpatch, newnft, nft._id);
 
-      alert("Successfully listed your NFT!");
+      alert("Successfully minted your NFT!");
 
       //window.location.replace("/")
     } catch (e) {
@@ -199,7 +199,7 @@ const Nft = () => {
       await transaction.wait();
 
       const newnft = { isListed: false, owner: user.walletAdress };
-      updateNFTByUserId(distpatch, newnft, nft._id);
+      updateNFTByNFTId(distpatch, newnft, nft._id);
       alert("You successfully bought the NFT!");
       updateMessage("");
     } catch (e) {
@@ -233,6 +233,7 @@ const Nft = () => {
       const newFav = {
         owner: user._id,
         nftId: nft_id,
+        nft:nft_id,
       };
       addFavourite(distpatch, newFav);
     } else {
