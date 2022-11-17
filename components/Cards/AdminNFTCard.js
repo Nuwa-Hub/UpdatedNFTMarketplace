@@ -1,18 +1,19 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { publicRequest } from "utils/requestMethods";
+
 
 // components
 
 export default function AdminNFTCard() {
   const [nfts, setNfts] = useState([]);
-  const data = useSelector((state) => state.admin.data?.nfts)
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (data) {
-      setNfts(data);
-    }
-  }, [data])
+    publicRequest.get("admin/nft?limit=5").then((res) => {
+      setNfts(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [])
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -60,7 +61,7 @@ export default function AdminNFTCard() {
                     {nft.NFTName}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {nft.description}
+                    {nft.description.substring(0, 10)}...
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {nft.owner.substring(0, 10)}...

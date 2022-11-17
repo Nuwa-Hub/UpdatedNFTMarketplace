@@ -1,28 +1,28 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { publicRequest } from "utils/requestMethods";
 // components
 
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import Link from "next/link";
 
 export default function NFTTable({ color }) {
-  const [data, setData] = useState(null)
+  const [collections, setCollections] = useState(null)
   const [isLoading, setLoading] = useState(false)
-  const tableHeader = ["Collection Name", "Owner", "Description", "No of NFTs", "Actions"];
-  const nfts = useSelector((state) => state.admin.data?.nfts)
-  const collections = useSelector((state) => state.admin.data?.collections)
-  const dispatch = useDispatch();
+  const tableHeader = ["Collection Name", "Owner", "Visits", "Description", "No of NFTs",];
+
   useEffect(() => {
-    setLoading(true)
-    if (collections) {
-      setData(collections);
+    setLoading(true);
+    publicRequest.get("admin/collection").then((res) => {
+      setCollections(res.data);
       setLoading(false);
-    }
-  }, [collections])
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [])
 
   if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  if (!collections) return <p>No collections data</p>
   return (
     <>
       <div
@@ -68,7 +68,7 @@ export default function NFTTable({ color }) {
               </tr>
             </thead>
             <tbody>
-              {data.map((collection) => {
+              {collections.map((collection) => {
                 return <tr key={collection._id}>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     <Link href={`/collection/${collection._id}`} >
@@ -81,14 +81,17 @@ export default function NFTTable({ color }) {
                     {collection.owner}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    {collection.visits}
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {collection.description.substring(0, 50) + "..."}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {collection.nfts ? collection.nfts.length : 0}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                  {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                     <TableDropdown />
-                  </td>
+                  </td> */}
                 </tr>
               })}
 

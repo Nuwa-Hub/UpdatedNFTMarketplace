@@ -1,28 +1,28 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { publicRequest } from "utils/requestMethods";
 // components
 
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import Link from "next/link";
 
 export default function NFTTable({ color }) {
-  const [data, setData] = useState(null)
+  const [nfts, setNfts] = useState(null)
   const [isLoading, setLoading] = useState(false)
-  const tableHeader = ["NFT Name", "Collection", "Owner", "Price", "Description", "Actions"];
-  const nfts = useSelector((state) => state.admin.data?.nfts)
-  const collections = useSelector((state) => state.admin.data?.collections)
+  const tableHeader = ["NFT Name", "Collection", "Owner", "Visits", "Price", "Description"];
   // const dispatch = useDispatch();
   useEffect(() => {
-    setLoading(true)
-    if (nfts) {
-      setData(nfts);
+    setLoading(true);
+    publicRequest.get("admin/nft").then((res) => {
+      setNfts(res.data);
       setLoading(false);
-    }
-  }, [nfts])
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [])
 
   if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  if (!nfts) return <p>No data</p>
   return (
     <>
       <div
@@ -68,7 +68,7 @@ export default function NFTTable({ color }) {
               </tr>
             </thead>
             <tbody>
-              {data.map((nft) => {
+              {nfts.map((nft) => {
                 return <tr key={nft._id}>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     <Link href={`/nft/${nft._id}`} >
@@ -80,7 +80,7 @@ export default function NFTTable({ color }) {
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     <Link href={`/collection/${nft.collectionId}`} >
                       <a>
-                        {collections.find(collection => collection._id === nft.collectionId)?.collectionName}
+                        {nft.collectionId.collectionName}
                       </a>
                     </Link>
                   </td>
@@ -88,14 +88,17 @@ export default function NFTTable({ color }) {
                     {nft.owner}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    {nft.visits}
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {nft.isListed ? nft.price : 'Not Listed'}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {nft.description}
+                    {nft.description.substring(0, 50) + "..."}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                  {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                     <TableDropdown />
-                  </td>
+                  </td> */}
                 </tr>
               })}
 

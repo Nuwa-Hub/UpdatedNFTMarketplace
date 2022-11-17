@@ -133,14 +133,18 @@ export default function AdminStatsCardLineChart() {
         },
       },
     };
-    var ctx = document.getElementById("line-chart").getContext("2d");
-    window.myLine = new Chart(ctx, config);
+    var ctx = document.getElementById("line-chart")?.getContext("2d");
+    if (ctx) {
+      window.myLine = new Chart(ctx, config);
+    }
+    // console.log("chart", statsChart.current);
+    // console.log(document.getElementById("line-chart"));
   }
 
   useEffect(() => {
+    setLoading(true)
     publicRequest.get('admin/stats')
-      .then(res => {
-        setLoading(false)
+      .then((res) => {
         const data = {}
         for (const property in res.data) {
           let row = new Array(12).fill(0)
@@ -153,8 +157,8 @@ export default function AdminStatsCardLineChart() {
           data[property] = row
         }
         setData(data)
-        createChart()
-        console.log(data)
+        setLoading(false)
+        console.log("data", data)
       })
       .catch(err => {
         console.log(err);
@@ -162,6 +166,9 @@ export default function AdminStatsCardLineChart() {
   }, []);
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+  if (data) {
+    createChart();
   }
   return (
     <>
