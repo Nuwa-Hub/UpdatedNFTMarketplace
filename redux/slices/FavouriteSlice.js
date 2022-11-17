@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   favourites: [],
+  favnft:[],
   isFetching: false,
   error: false,
 };
@@ -13,10 +14,10 @@ export const FavouriteSlice = createSlice({
     //GET ALL
 
     getfavouritesSuccess: (state, action) => {
-     
        state.favourites = action.payload.map((fav)=>{
         return fav.nftId
      })
+     state.favnft=action.payload;
     },
 
     addfavouriteSuccess: (state, action) => {
