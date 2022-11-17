@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { publicRequest, userRequest } from "utils/requestMethods";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import Marketplace from "../../common/Marketplace.json";
+
 const HighestBidderSell = ({ nft }) => {
   const router = useRouter();
   const user = useSelector((state) => state.user);

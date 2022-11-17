@@ -11,6 +11,7 @@
 		"test:ci": "jest --ci"
 	},
 	"dependencies": {
+		"@emailjs/browser": "^3.9.1",
 		"@fortawesome/fontawesome-free": "5.15.3",
 		"@headlessui/react": "^1.7.4",
 		"@heroicons/react": "^1.0.6",
@@ -38,6 +39,7 @@
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.4.0",
+		"react-moment": "^1.1.2",
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.4.1",
 		"react-scroll": "^1.8.7",
