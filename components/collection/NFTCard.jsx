@@ -19,19 +19,28 @@ export default function NFTCard() {
 
 	useEffect(() => {
 		getNFTsByCollectionId(dispatch, collection_id);
-		console.log("sfsdfdf");
-	}, [dispatch, collection_id]);
+		console.log("inside useEffect");
+	}, []);
 
 	//get all NFTs that include to the relevent collection
 	const nfts = useSelector((state) => state.NFT.NFTs);
-	console.log(nfts);
+	console.log("nfts", nfts);
 
-	const handleFilter = (fileter_id) => {
+	const handleFilter = (fileter_id , nfts) => {
 		if (fileter_id == 1) {
+			let cpy = [...nfts];
+			let sorted = cpy.sort(
+				(p1, p2) => (p1.price < p2.price) ? 1 : (p1.price > p2.price) ? -1 : 0);
+			setFilterData(sorted);
 			setLowToHigh(true);
+			
 
 			//get all NFTs that include to the relevent collection
 		} else if (fileter_id == 2) {
+			let cpy = [...nfts];
+			let sorted = cpy.sort(
+				(p1, p2) => (p1.price > p2.price) ? 1 : (p1.price < p2.price) ? -1 : 0);
+			setFilterData(sorted);
 			setHighToLow(true);
 			//get all NFTs that include to the relevent collection
 		} else if (fileter_id == 3) {
@@ -50,7 +59,7 @@ export default function NFTCard() {
 					<div className="w-full flex justify-around">
 						{!lowToHigh && (
 							<button
-								onClick={() => handleFilter(1)}
+								onClick={() => handleFilter(1 , nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -77,7 +86,7 @@ export default function NFTCard() {
 						)}
 						{!highToLow && (
 							<button
-								onClick={() => handleFilter(2)}
+								onClick={() => handleFilter(2 , nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -104,7 +113,7 @@ export default function NFTCard() {
 						)}
 						{!mostFavorite && (
 							<button
-								onClick={() => handleFilter(3)}
+								onClick={() => handleFilter(3 , nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -134,7 +143,7 @@ export default function NFTCard() {
 			</div>
 			<div className="container px-2 py-2 mx-auto lg:pt-12 lg:px-2">
 				<div className="flex flex-wrap -m-1 md:-m-2">
-					{nfts.map((nft) => (
+					{filterData.map((nft) => (
 						<div
 							key={nft._id}
 							className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
