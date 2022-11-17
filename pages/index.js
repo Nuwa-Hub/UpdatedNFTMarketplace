@@ -18,6 +18,7 @@ import GifCollection from "@/components/HomePgaeHelper/GifCollection";
 export default function Home() {
   const { useState } = React;
   //localStorage.clear();
+  
   return (
     <div className="bg-zinc-200">
       <Head>

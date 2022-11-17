@@ -9,8 +9,11 @@ export default async function handler(req, res) {
 	//get the favourite objects from the collection id 
 	if (req.method === "GET") {
 		try {
-			const favos = await Favourite.find({collectionId
-                :collection_id});
+			const favos = await Favourite.find().populate({path: "nft",
+			match: {
+				collectionId: collection_id,
+			
+			}});
 		
 			res.status(200).json(favos);
 		} catch (err) {
