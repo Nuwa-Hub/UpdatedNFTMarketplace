@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	//get method for rendering data
 	if (req.method === "GET") {
 		try {
-			const favos = await Favourite.find({owner:userId});
+			const favos = await Favourite.find({owner:userId}).populate("nft");
 		
 			res.status(200).json(favos);
 		} catch (err) {
