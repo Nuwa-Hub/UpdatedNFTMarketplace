@@ -25,100 +25,109 @@ import { getCollectionsSuccess } from "redux/slices/collectionSlice";
 // })
 
 const explorecollection = () => {
-  //console.log(collections);
-  //const collections=[]
-  const dispatch = useDispatch();
-  const [coltype, setcoltype] = useState("");
-  const [allcollections, setallcollection] = useState([]);
-  const collections = useSelector((state) => state.collection.collections);
+	//console.log(collections);
+	//const collections=[]
+	const dispatch = useDispatch();
+	const [coltype, setcoltype] = useState("");
+	const [allcollections, setallcollection] = useState([]);
+	const collections = useSelector((state) => state.collection.collections);
 
-  useEffect(() => {
-    getAllCollections(dispatch);
-  }, [dispatch]);
+	useEffect(() => {
+		getAllCollections(dispatch);
+	}, [dispatch]);
 
-  useEffect(() => {
-    if (coltype != "") {
-      console.log(collections);
-      const filtercollections = collections?.filter((col) => {
-        return col.type == coltype;
-      });
-      setallcollection(filtercollections);
-    } else {
-      setallcollection(collections);
-    }
-    //console.log(filtercollections)
-  }, [coltype, collections]);
-  return (
-    <div className="overflow-hidden">
-      <h1 className="m-5 font-mono tracking-tight text-bold dark:text-white text-left sm:text-4xl  md:text-4xl lg:text-6xl sm:scroll-auto w-fit">
-        Explore Collections
-      </h1>
-      <div
-        className="
-       bg-black
+	useEffect(() => {
+		if (coltype != "") {
+			console.log(collections);
+			const filtercollections = collections?.filter((col) => {
+				return col.type == coltype;
+			});
+			setallcollection(filtercollections);
+		} else {
+			setallcollection(collections);
+		}
+		//console.log(filtercollections)
+	}, [coltype, collections]);
+	return (
+		<div className="overflow-hidden">
+			<h1 className="m-5 font-mono tracking-tight text-bold dark:text-white text-left sm:text-4xl  md:text-4xl lg:text-6xl sm:scroll-auto w-fit">
+				Explore Collections
+			</h1>
+			<div
+				className="
+     
         h-14 flex justify-around
          items-center 
-         text-xl text-white overflow-x-auto  space-x-8 w-full sm:overflow-x-auto"
-      >
-        <button
-          onClick={() => {
-            setcoltype("children");
-          }}
-        >
-          <div className="hover:animate-bounce">Children</div>
-        </button>
-        <button
-          onClick={() => {
-            setcoltype("artwork");
-          }}
-        >
-          <div className="hover:animate-bounce">Artwork</div>
-        </button>
-        <button
-          onClick={() => {
-            setcoltype("animals");
-          }}
-        >
-          <div className="hover:animate-bounce">Animals</div>
-        </button>
-        <button
-          onClick={() => {
-            setcoltype("vitual fashion");
-          }}
-        >
-          <div className="hover:animate-bounce">Virtual Fashion</div>
-        </button>
-        <button
-          onClick={() => {
-            setcoltype("gaming");
-          }}
-        >
-          <div className="hover:animate-bounce">Gaming</div>
-        </button>
-        <button
-          onClick={() => {
-            setcoltype("memes");
-          }}
-        >
-          <div className="hover:animate-bounce">Memes</div>
-        </button>
-      </div>
-      <div className="overflow-hidden text-gray-700">
-        <div className="px-1 py-1 mx-auto lg:pt-12 lg:px-2">
-          <div className="flex flex-wrap -m-1 md:-m-2 ">
-            {allcollections?.map((collection) => (
-              <div
-                className="flex flex-wrap w-full  sm:w-full md:w-1/2 lg:w-1/3"
-                key={collection._id}
-              >
-                <Collectioncard key={collection._id} collection={collection} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+         text-xl  overflow-x-auto  space-x-8 w-full sm:overflow-x-auto"
+			>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700  hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("children");
+					}}
+				>
+					<div className="hover:animate-bounce">Children</div>
+				</button>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700 hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("artwork");
+					}}
+				>
+					<div className="hover:animate-bounce">Artwork</div>
+				</button>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700  hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("animals");
+					}}
+				>
+					<div className="hover:animate-bounce">Animals</div>
+				</button>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700  hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("vitual fashion");
+					}}
+				>
+					<div className="hover:animate-bounce">Virtual Fashion</div>
+				</button>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700 hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("gaming");
+					}}
+				>
+					<div className="hover:animate-bounce">Gaming</div>
+				</button>
+				<button
+					className="rounded-full px-4 py-2 border-2 border-blue-700  hover:bg-blue-700 hover:text-blue-100 duration-300"
+					onClick={() => {
+						setcoltype("memes");
+					}}
+				>
+					<div className="hover:animate-bounce">Memes</div>
+				</button>
+			</div>
+			<div className="overflow-hidden text-gray-700">
+				<div className="px-1 py-1 mx-auto lg:pt-12 lg:px-2">
+					<div className="flex flex-wrap -m-1 md:-m-2 ">
+						{allcollections?.map((collection) => (
+							<div
+								className="flex flex-wrap w-full  sm:w-full md:w-1/2 lg:w-1/3"
+								key={collection._id}
+							>
+								<Collectioncard
+									key={collection._id}
+									collection={collection}
+								/>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default explorecollection;
