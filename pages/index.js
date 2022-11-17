@@ -14,6 +14,8 @@ import Header from "@/components/HomePgaeHelper/Header";
 import Description from "@/components/HomePgaeHelper/Description";
 import RaffleHelper from "@/components/HomePgaeHelper/RaffleHelper";
 import GifCollection from "@/components/HomePgaeHelper/GifCollection";
+import NFTVedio from "@/components/HomePgaeHelper/NFTVedio";
+import MarketVedio from "@/components/HomePgaeHelper/MarketVedio";
 
 export default function Home() {
   const { useState } = React;
@@ -29,8 +31,10 @@ export default function Home() {
       {/* <SlideShow />  */}
       <Header />
       <GifCollection/>
+      <NFTVedio/>
       <RaffleHelper/>
       {/* <RaffleModel /> */}
+      <MarketVedio/>
       <ProductLists />
       <Trending />
       <Description />
