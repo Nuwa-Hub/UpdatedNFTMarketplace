@@ -66,7 +66,7 @@ const index = () => {
                 <div class="text-center my-2">
                   <img
                     class="h-16 w-16 rounded-full mx-auto"
-                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                    src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/nft-Thu%20Nov%2003%202022%2013%3A44%3A54%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=ca790875-c4c0-4065-9a86-5c3ef2b4eefa"
                     alt=""
                   />
                   <a href="#" class="text-main-color">
@@ -76,7 +76,7 @@ const index = () => {
                 <div class="text-center my-2">
                   <img
                     class="h-16 w-16 rounded-full mx-auto"
-                    src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
+                    src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/ProfileImg-Wed%20Sep%2028%202022%2011%3A23%3A38%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=c97ca83d-8d50-43e4-82cc-175858c911f7"
                     alt=""
                   />
                   <a href="#" class="text-main-color">
@@ -86,7 +86,7 @@ const index = () => {
                 <div class="text-center my-2">
                   <img
                     class="h-16 w-16 rounded-full mx-auto"
-                    src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                    src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/nft-Mon%20Nov%2014%202022%2014%3A18%3A56%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=bdcaff0b-a695-456f-85c6-6a9e2a8565cb"
                     alt=""
                   />
                   <a href="#" class="text-main-color">
@@ -96,7 +96,7 @@ const index = () => {
                 <div class="text-center my-2">
                   <img
                     class="h-16 w-16 rounded-full mx-auto"
-                    src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
+                    src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Thu%20Nov%2003%202022%2013%3A45%3A32%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=542259eb-69be-4cef-a962-6ca6e32b5585"
                     alt=""
                   />
                   <a href="#" class="text-main-color">
@@ -315,28 +315,28 @@ const index = () => {
                   <div class="grid grid-cols-3">
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                        class="h-16 w-16 mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Wed%20Nov%2002%202022%2010%3A25%3A35%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=75900de2-e82b-434b-a4e3-426585a1a6f1"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
-                        Kojstantin
+                        Dogss loverssss
                       </a>
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Thu%20Nov%2003%202022%2013%3A45%3A32%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=542259eb-69be-4cef-a962-6ca6e32b55854"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
-                        James
+                        Art scripts areaa
                       </a>
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/ProfileImg-Wed%20Nov%2016%202022%2006%3A21%3A51%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=01cd6313-3434-43aa-af4a-12e4048d21b8"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
@@ -345,12 +345,12 @@ const index = () => {
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Sun%20Nov%2013%202022%2011%3A36%3A37%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=db5b83a1-6ee1-4083-97d8-1a0cbc3011c6"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
-                        Casey
+                        Game Plazzaaa
                       </a>
                     </div>
                   </div>
@@ -386,8 +386,8 @@ const index = () => {
                   <div class="grid grid-cols-3">
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/1.jpeg?alt=media&token=168bcc19-4b51-4dd8-a985-6a8179b20ff3"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
@@ -396,8 +396,8 @@ const index = () => {
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/2.jpeg?alt=media&token=9ab80e18-8147-4fca-94fb-40d340dae154"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
@@ -406,8 +406,8 @@ const index = () => {
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/3.jpeg?alt=media&token=23578fd9-1af3-4a7c-b848-da158bb9abc8"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
@@ -416,8 +416,8 @@ const index = () => {
                     </div>
                     <div class="text-center my-2">
                       <img
-                        class="h-16 w-16 rounded-full mx-auto"
-                        src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
+                        class="h-16 w-16  mx-auto"
+                        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/4.jpeg?alt=media&token=9a848288-562f-4434-aa3b-d080167d91aa"
                         alt=""
                       />
                       <a href="#" class="text-main-color">
