@@ -143,7 +143,7 @@ export default function NFTCard() {
 			</div>
 			<div className="container px-2 py-2 mx-auto lg:pt-12 lg:px-2">
 				<div className="flex flex-wrap -m-1 md:-m-2">
-					{filterData.map((nft) => (
+					{nfts.map((nft) => (
 						<div
 							key={nft._id}
 							className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
