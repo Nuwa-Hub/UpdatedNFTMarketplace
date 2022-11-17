@@ -11,7 +11,7 @@ export default function NFTTable({ color }) {
   const [isLoading, setLoading] = useState(false)
   const tableHeader = ["Collection Name", "Owner", "Visits", "Description", "No of NFTs",];
 
-  useEffect(() => {
+  function getCollections() {
     setLoading(true);
     publicRequest.get("admin/collection").then((res) => {
       setCollections(res.data);
@@ -19,8 +19,18 @@ export default function NFTTable({ color }) {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  useEffect(() => {
+    getCollections();
   }, [])
-
+  function blockUnBlockHandler(collection){
+    publicRequest.put(`admin/collection/${collection._id}`, { access: !collection.access })
+        .then((res) => {
+          getCollections();
+        }).catch((err) => {
+          console.log(err);
+        })
+  }
   if (isLoading) return <p>Loading...</p>
   if (!collections) return <p>No collections data</p>
   return (
@@ -40,7 +50,7 @@ export default function NFTTable({ color }) {
                   (color === "light" ? "text-slate-700" : "text-white")
                 }
               >
-                NFTs
+                Collections
               </h3>
             </div>
           </div>
@@ -89,9 +99,15 @@ export default function NFTTable({ color }) {
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {collection.nfts ? collection.nfts.length : 0}
                   </td>
-                  {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                    <TableDropdown />
-                  </td> */}
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                    <button
+                      className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => blockUnBlockHandler(collection)}
+                      >
+                      {collection.access ? "Block" : "Unblock"}
+                    </button>
+                  </td>
                 </tr>
               })}
 

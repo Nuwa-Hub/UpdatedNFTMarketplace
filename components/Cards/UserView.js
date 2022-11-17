@@ -25,7 +25,7 @@ export default function UserView({ color }) {
   // console.log(data);
   function getUser() {
     setLoading(true)
-    publicRequest.get(`admin/users/${user_id}`)
+    publicRequest.get(`admin/user/${user_id}`)
       .then((res) => {
         setUser(res.data.user)
         setLoading(false)
@@ -36,7 +36,7 @@ export default function UserView({ color }) {
   }
   function blockUnBlockUser() {
     if (user)
-      publicRequest.put(`admin/users/${user._id}`, { access: !user.access })
+      publicRequest.put(`admin/user/${user._id}`, { access: !user.access })
         .then((res) => {
           getUser()
         }).catch((err) => {
