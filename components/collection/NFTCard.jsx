@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNFTsByCollectionId } from "redux/actions/NFTAction";
+import { publicRequest } from "utils/requestMethods";
 import { IoFilter } from "react-icons/io5";
 
 export default function NFTCard() {
@@ -27,11 +28,13 @@ export default function NFTCard() {
 	console.log("nfts", nfts);
 	console.log("filtered", filterData);
 
-	const handleFilter = (fileter_id , nfts) => {
+	const handleFilter = async (fileter_id, nfts) => {
 		setFilter(true);
 		if (fileter_id == 1) {
 			let cpy = [...nfts];
-			let sorted = cpy.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+			let sorted = cpy.sort(
+				(a, b) => parseFloat(a.price) - parseFloat(b.price)
+			);
 			setFilterData(sorted);
 			setLowToHigh(true);
 			setHighToLow(false);
@@ -40,14 +43,26 @@ export default function NFTCard() {
 			//get all NFTs that include to the relevent collection
 		} else if (fileter_id == 2) {
 			let cpy = [...nfts];
-			let sorted = cpy.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+			let sorted = cpy.sort(
+				(a, b) => parseFloat(b.price) - parseFloat(a.price)
+			);
 			setFilterData(sorted);
 			setHighToLow(true);
 			setLowToHigh(false);
 			setMostFavorite(false);
 			//get all NFTs that include to the relevent collection
 		} else if (fileter_id == 3) {
+			const collection_res = await publicRequest.get(
+				`/favourite/collection/${collection_id}`
+			);
+			let final_arr = [];
+			collection_res.data.forEach((nft) => {
+				final_arr.push(nft.full_nft);
+			});
+			setFilterData(final_arr);
 			setMostFavorite(true);
+			setHighToLow(false);
+			setLowToHigh(false);
 			//get all NFTs that include to the relevent collection
 		}
 	};
@@ -62,7 +77,7 @@ export default function NFTCard() {
 					<div className="w-full flex justify-around">
 						{!lowToHigh && (
 							<button
-								onClick={() => handleFilter(1 , nfts)}
+								onClick={() => handleFilter(1, nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -72,8 +87,10 @@ export default function NFTCard() {
 						)}
 						{lowToHigh && (
 							<button
-								onClick={() => {setLowToHigh(false)
-								setFilter(false)}}
+								onClick={() => {
+									setLowToHigh(false);
+									setFilter(false);
+								}}
 								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
 								<span class="w-full inline-flex leading-4 align-middle">
@@ -90,7 +107,7 @@ export default function NFTCard() {
 						)}
 						{!highToLow && (
 							<button
-								onClick={() => handleFilter(2 , nfts)}
+								onClick={() => handleFilter(2, nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -100,8 +117,10 @@ export default function NFTCard() {
 						)}
 						{highToLow && (
 							<button
-								onClick={() => {setHighToLow(false)
-									setFilter(false)}}
+								onClick={() => {
+									setHighToLow(false);
+									setFilter(false);
+								}}
 								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
 								<span class="w-full inline-flex leading-4 align-middle">
@@ -118,7 +137,7 @@ export default function NFTCard() {
 						)}
 						{!mostFavorite && (
 							<button
-								onClick={() => handleFilter(3 , nfts)}
+								onClick={() => handleFilter(3, nfts)}
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
@@ -148,80 +167,82 @@ export default function NFTCard() {
 			</div>
 			<div className="container px-2 py-2 mx-auto lg:pt-12 lg:px-2">
 				<div className="flex flex-wrap -m-1 md:-m-2">
-					{filter && filterData.map((nft) => (
-						<div
-							key={nft._id}
-							className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
-						>
-							<div className="group max-w-sm  m-4 bg-zinc-200 rounded-lg border border-gray-200  ">
-								<Link href={`/nft/${nft._id}`}>
-									<div className="w-full aspect-square  overflow-hidden">
-										<img
-											alt="gallery"
-											className="block object-cover object-center w-full h-full rounded-lg hover:shadow-lg transition ease-in-out  hover:-translate-y-1 hover:scale-110"
-											src={nft.Img}
-										/>
+					{filter &&
+						filterData.map((nft) => (
+							<div
+								key={nft._id}
+								className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
+							>
+								<div className="group max-w-sm  m-4 bg-zinc-200 rounded-lg border border-gray-200  ">
+									<Link href={`/nft/${nft._id}`}>
+										<div className="w-full aspect-square  overflow-hidden">
+											<img
+												alt="gallery"
+												className="block object-cover object-center w-full h-full rounded-lg hover:shadow-lg transition ease-in-out  hover:-translate-y-1 hover:scale-110"
+												src={nft.Img}
+											/>
+										</div>
+									</Link>
+
+									<div className="px-5 pt-2">
+										<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+											NFT Name
+										</h5>
+
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+											price
+										</p>
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400 group-hover:hidden">
+											Last Sale
+										</p>
 									</div>
-								</Link>
-
-								<div className="px-5 pt-2">
-									<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-										NFT Name
-									</h5>
-
-									<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-										price
-									</p>
-									<p className="mb-3 font-normal text-gray-700 dark:text-gray-400 group-hover:hidden">
-										Last Sale
-									</p>
+									<button
+										type="button"
+										className="hidden flex h-10 bg-gradient-to-r from-indigo-800 via-green-500 to-teal-200  w-full rounded-none group-hover:block"
+									>
+										Buy Now
+									</button>
 								</div>
-								<button
-									type="button"
-									className="hidden flex h-10 bg-gradient-to-r from-indigo-800 via-green-500 to-teal-200  w-full rounded-none group-hover:block"
-								>
-									Buy Now
-								</button>
 							</div>
-						</div>
-					))}
-					{! filter && nfts.map((nft) => (
-						<div
-							key={nft._id}
-							className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
-						>
-							<div className="group max-w-sm  m-4 bg-zinc-200 rounded-lg border border-gray-200  ">
-								<Link href={`/nft/${nft._id}`}>
-									<div className="w-full aspect-square  overflow-hidden">
-										<img
-											alt="gallery"
-											className="block object-cover object-center w-full h-full rounded-lg hover:shadow-lg transition ease-in-out  hover:-translate-y-1 hover:scale-110"
-											src={nft.Img}
-										/>
+						))}
+					{!filter &&
+						nfts.map((nft) => (
+							<div
+								key={nft._id}
+								className="flex flex-wrap w-full  sm:w-1/2 md:w-1/3 lg:w-1/4 "
+							>
+								<div className="group max-w-sm  m-4 bg-zinc-200 rounded-lg border border-gray-200  ">
+									<Link href={`/nft/${nft._id}`}>
+										<div className="w-full aspect-square  overflow-hidden">
+											<img
+												alt="gallery"
+												className="block object-cover object-center w-full h-full rounded-lg hover:shadow-lg transition ease-in-out  hover:-translate-y-1 hover:scale-110"
+												src={nft.Img}
+											/>
+										</div>
+									</Link>
+
+									<div className="px-5 pt-2">
+										<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+											NFT Name
+										</h5>
+
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+											price
+										</p>
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400 group-hover:hidden">
+											Last Sale
+										</p>
 									</div>
-								</Link>
-
-								<div className="px-5 pt-2">
-									<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-										NFT Name
-									</h5>
-
-									<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-										price
-									</p>
-									<p className="mb-3 font-normal text-gray-700 dark:text-gray-400 group-hover:hidden">
-										Last Sale
-									</p>
+									<button
+										type="button"
+										className="hidden flex h-10 bg-gradient-to-r from-indigo-800 via-green-500 to-teal-200  w-full rounded-none group-hover:block"
+									>
+										Buy Now
+									</button>
 								</div>
-								<button
-									type="button"
-									className="hidden flex h-10 bg-gradient-to-r from-indigo-800 via-green-500 to-teal-200  w-full rounded-none group-hover:block"
-								>
-									Buy Now
-								</button>
 							</div>
-						</div>
-					))}
+						))}
 				</div>
 			</div>
 		</section>
