@@ -45,12 +45,17 @@ export default function index() {
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="md:col-span-1">
                         <div className="px-4 sm:px-0">
-                            <h3 className="text-lg font-medium leading-6 text-gray-900">Complaint Form</h3>
-                            <p className="mt-1 text-sm text-gray-600">
-                                This information won't be displayed publicly.
-                            </p>
+                         <img src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/nft-lawsuit-1-million.jpg?alt=media&token=b33c1d0d-7ae7-4128-a5be-483f33dd1d9b"
+                            className="m-1 mt-16 rounded-t-2xl"
+                         />
+                        </div>
+                        <div className="px-4 sm:px-0">
+                         <img src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/complain.jpg?alt=media&token=eb1ead9d-51ad-4295-abd6-9e946d33ded3"
+                            className="m-1 rounded-b-2xl"
+                         />
                         </div>
                     </div>
+                    
                     <div className="mt-5 md:col-span-2 md:mt-0">
                         <form onSubmit={handleClick}>
                             <div className="shadow sm:overflow-hidden sm:rounded-md">
