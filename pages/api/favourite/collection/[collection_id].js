@@ -6,10 +6,11 @@ export default async function handler(req, res) {
 
 	await connectDB();
 
-	//get method for rendering data
+	//get the favourite objects from the collection id 
 	if (req.method === "GET") {
 		try {
-			const favos = await Favourite.find({nft:collections_id});
+			const favos = await Favourite.find({collectionId
+                :collection_id});
 		
 			res.status(200).json(favos);
 		} catch (err) {
