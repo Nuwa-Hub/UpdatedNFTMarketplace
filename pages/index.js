@@ -26,15 +26,13 @@ export default function Home() {
       <Head>
         <title>Kryptonaut</title>
       </Head>
-      {/* <Hero /> */}
-      {/* <SwiperSlider />  */}
-      {/* <SlideShow />  */}
+
       <Header />
       <GifCollection/>
-      <NFTVedio/>
+      {/* <NFTVedio/> */}
       <RaffleHelper/>
-      {/* <RaffleModel /> */}
-      <MarketVedio/>
+
+      {/* <MarketVedio/> */}
       <ProductLists />
       <Trending />
       <Description />

@@ -13,10 +13,10 @@ const NFTVedio = () => {
     <div className="flex items-center justify-center max-h-screen h-24 sm:h-screen">
       <video
         ref={videoRef}
-        src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/vedio1.mp4?alt=media&token=d3b69aa1-f0a2-4f3b-abb8-de28d69f24e1"
+        src="https://firebasestorage.googleapis.com/v0/b/marketplace2-1c44b.appspot.com/o/vedio1.mp4?alt=media&token=7dea5623-9f00-492c-8be2-dd79f8742867"
         className="w-full h-screen"
         autoplay
-        muted
+        muted={false}
         loop
       />
     </div>
