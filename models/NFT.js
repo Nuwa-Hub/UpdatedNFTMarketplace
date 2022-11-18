@@ -17,6 +17,7 @@ const NFTSchema = new mongoose.Schema(
 		visits: { type: Number, default: 0 },
         listType:{ type: String, default: ""},
 		listId:{ type: String, default: ""},
+		fixedValue:{ type: String, default: ""},
 	},
 	{ timestamps: true }
 );

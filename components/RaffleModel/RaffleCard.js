@@ -96,7 +96,7 @@ const RaffleCard = ({ nft }) => {
           }}
           onClick={()=>{addRafbid()}}
         >
-          Click Here
+          Click Here For Bid
         </button>
       </div>
     </div>

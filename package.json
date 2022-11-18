@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint",
 		"test": "jest --watch",
-		"test:ci": "jest --ci"
+		"test:ci": "jest --ci",
+		"cypress:open": "cypress open"
+			
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.1",
@@ -23,6 +25,7 @@
 		"axios": "^0.27.2",
 		"chart.js": "2.9.4",
 		"crypto-js": "^4.1.1",
+		"cypress": "^11.1.0",
 		"dotenv": "^16.0.2",
 		"ethers": "^5.7.1",
 		"firebase": "^9.13.0",

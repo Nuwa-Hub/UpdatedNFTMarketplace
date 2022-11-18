@@ -29,7 +29,7 @@ export default function Home() {
 
       <Header />
       <GifCollection/>
-      {/* <NFTVedio/> */}
+      {/* <NFTVedio/>  */}
       <RaffleHelper/>
 
       {/* <MarketVedio/> */}
