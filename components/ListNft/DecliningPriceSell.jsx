@@ -61,7 +61,7 @@ const DecliningPriceSell = ({ nft }) => {
           ...values,
           nft: router.query.id,
           owner: user.currentUser.walletAdress,
-          auctionType: "dec",
+          auctionType: "Decreasing",
         };
         publicRequest
           .post("auction", values)
@@ -77,7 +77,7 @@ const DecliningPriceSell = ({ nft }) => {
           ...values,
           nft: router.query.id,
           owner: user.currentUser.walletAdress,
-          auctionType: "dec",
+          auctionType: "Decreasing",
         };
         publicRequest
           .post("auction", values)
