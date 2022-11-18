@@ -89,8 +89,8 @@ const Raffle = ({ nft }) => {
     },
     validationSchema: Yup.object({
       fixedValue: Yup.number()
-        .required("Starting price is required")
-        .positive("Starting price must be positive"),
+        .required("fixed price is required")
+        .positive("fixed price must be positive"),
       startDate: Yup.date().required("Start date is required"),
       endDate: Yup.date()
         .required("End date is required")
