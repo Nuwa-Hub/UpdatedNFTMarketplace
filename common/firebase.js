@@ -7,13 +7,13 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBop-5thXQza_4oGaOvPbQiYQE3JzA-rFU",
-  authDomain: "nft-marketplace-8fa87.firebaseapp.com",
-  projectId: "nft-marketplace-8fa87",
-  storageBucket: "nft-marketplace-8fa87.appspot.com",
-  messagingSenderId: "359997956370",
-  appId: "1:359997956370:web:d3369c11ba594f9749d3cb",
-  measurementId: "G-L676SR98CK"
+  apiKey: "AIzaSyC5Wp-YT2n2QopdgVeihCxXc2ZK41WlMBo",
+  authDomain: "marketplacestore-fd5f1.firebaseapp.com",
+  projectId: "marketplacestore-fd5f1",
+  storageBucket: "marketplacestore-fd5f1.appspot.com",
+  messagingSenderId: "577143518094",
+  appId: "1:577143518094:web:2f56ea4f4f7a8d65076adf",
+  measurementId: "G-7JV40G7NCL"
 };
 
 // Initialize Firebase
