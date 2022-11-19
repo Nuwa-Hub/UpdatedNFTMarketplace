@@ -1,5 +1,6 @@
 import Auction from "models/Auction";
 import NFT from "models/NFT";
+import Bid from "models/Bid";
 import connectDB from "utils/connectDB";
 
 export default async function handler(req, res) {
@@ -11,7 +12,12 @@ export default async function handler(req, res) {
 	//get method for rendering data
 	if (method === "GET") {
 		try {
-			const auctions = await Auction.find().populate("nft").populate("winningBid").populate("bid");
+			const auctions = await Auction.find(
+				{startDate: {$lte: new Date()}}
+			)
+			.populate("nft")
+			.populate("winningBid")
+			.populate("bid");
 			res.status(200).json(auctions);
 		} catch (err) {
 			res.status(500).json(err);
