@@ -14,7 +14,7 @@ export default function UsersTable({ color }) {
   useEffect(() => {
     setLoading(true);
     publicRequest
-      .get("admin/users")
+      .get("admin/user")
       .then((res) => {
         setData(res.data);
         setLoading(false);

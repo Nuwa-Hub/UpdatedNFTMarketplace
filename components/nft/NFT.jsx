@@ -115,7 +115,7 @@ const Nft = () => {
       startPrice -
       (startPrice - endPrice) * (currentDurationHours / durationHours)
     ).toFixed(8);
-
+    console.log(price);
     return price;
   }
 
@@ -285,7 +285,7 @@ const Nft = () => {
               <div className="basis-1/2 items-center m-1">
                 <p className="text-xl  font-mono tracking-tight text-slate-500 dark:text-white">
                   {/* Owners Name */}
-                  Owned by {nft.owner == user.walletAdress ? "you" : nft.owner}
+                  Owned by {nft.owner == user?.walletAdress ? "you" : nft.owner}
                 </p>
               </div>
 
@@ -305,8 +305,9 @@ const Nft = () => {
               </p>
             </div>
             <div className="flex flex-auto mx-2 mt-5 content-center ">
+
               <div className="basis-1/2 items-center m-1">
-                {nft.owner == user.walletAdress ? (
+                {nft.owner == user?.walletAdress ? (
                   list ? (
                     list.type == "auction" ? (
                       //table for aution details TODO
@@ -319,7 +320,7 @@ const Nft = () => {
                               <th className="px-4 py-2">End Price</th>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                            list.winningBid ? (
+                              list.winningBid ? (
                               <th className="px-4 py-2">Current max Bid</th>
                             ) : null}
                             <th className="px-4 py-2">Start Date</th>
@@ -340,7 +341,7 @@ const Nft = () => {
                               </td>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                            list.winningBid ? (
+                              list.winningBid ? (
                               <td className="border px-4 py-2">
                                 {list.winningBid.value}
                               </td>
