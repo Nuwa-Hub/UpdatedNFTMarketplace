@@ -62,20 +62,20 @@ const Listing = () => {
               <ListingType setTimed={setTimed} />
             </div>
 
-            {timed === null ? null : !timed ?  (
-            
-			  <div className="mx-2 mt-5 ">
+            {timed === null ? null : !timed ? (
+              <div className="mx-2 mt-5 ">
                 <FixedPriceForm nft={nft} />
               </div>
-            ) : timed==1 ? (  <div className="mx-2 mt-5 ">
+            ) : timed == 1 ? (
+              <div className="mx-2 mt-5 ">
                 <AuctionForm nft={nft} />
-              </div>): (
-				<div className="mx-2 mt-5 ">
+              </div>
+            ) : (
+              <div className="mx-2 mt-5 ">
                 <Raffle nft={nft} />
               </div>
             )}
-			
-      
+
             {/* <div className="flex flex-auto mx-2 mt-5 content-center ">
 							<div className="basis-1/2 items-center m-1">
 								<button

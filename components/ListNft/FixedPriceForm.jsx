@@ -16,9 +16,7 @@ const FixedPriceForm = ({ nft }) => {
       price: "",
     },
     validationSchema: Yup.object({
-      price: Yup.number()
-        
-        .positive("Price must be positive"),
+      price: Yup.number().positive("Price must be positive"),
     }),
   });
 
@@ -59,7 +57,7 @@ const FixedPriceForm = ({ nft }) => {
 
   async function handleSubmited(e) {
     e.preventDefault();
-    console.log(nft)
+    console.log(nft);
     if (nft.mint == true) {
       console.log("list");
       await listingNFT();

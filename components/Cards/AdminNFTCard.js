@@ -2,18 +2,20 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { publicRequest } from "utils/requestMethods";
 
-
 // components
 
 export default function AdminNFTCard() {
   const [nfts, setNfts] = useState([]);
   useEffect(() => {
-    publicRequest.get("admin/nft?limit=5").then((res) => {
-      setNfts(res.data);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }, [])
+    publicRequest
+      .get("admin/nft?limit=5")
+      .then((res) => {
+        setNfts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -25,10 +27,8 @@ export default function AdminNFTCard() {
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <Link href='/admin/nfts'>
-                <a
-                  className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                >
+              <Link href="/admin/nfts">
+                <a className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                   See all
                 </a>
               </Link>
@@ -56,20 +56,22 @@ export default function AdminNFTCard() {
             </thead>
             <tbody>
               {nfts.map((nft) => {
-                return <tr key={nft._id}>
-                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                    {nft.NFTName}
-                  </th>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {nft.description.substring(0, 10)}...
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {nft.owner.substring(0, 10)}...
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {nft.visits}
-                  </td>
-                </tr>
+                return (
+                  <tr key={nft._id}>
+                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                      {nft.NFTName}
+                    </th>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {nft.description.substring(0, 10)}...
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {nft.owner.substring(0, 10)}...
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {nft.visits}
+                    </td>
+                  </tr>
+                );
               })}
             </tbody>
           </table>

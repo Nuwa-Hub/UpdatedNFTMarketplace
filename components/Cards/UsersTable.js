@@ -8,24 +8,26 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import Link from "next/link";
 
 export default function UsersTable({ color }) {
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
-    publicRequest.get('admin/users')
+    setLoading(true);
+    publicRequest
+      .get("admin/users")
       .then((res) => {
-        setData(res.data)
-        setLoading(false)
-        console.log(res.data)
-      }).catch((err) => {
-        console.log(err)
-        setLoading(false)
+        setData(res.data);
+        setLoading(false);
+        console.log(res.data);
       })
-  }, [])
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, []);
 
-  if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
   console.log(data);
   return (
     <>
@@ -107,41 +109,41 @@ export default function UsersTable({ color }) {
             </thead>
             <tbody>
               {data.users.map((user) => {
-                return <tr key={user._id}>
-                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                    <img
-                      src="/img/bootstrap.jpg"
-                      className="h-12 w-12 bg-white rounded-full border"
-                      alt="..."
-                    ></img>{" "}
-                    <span
-                      className={
-                        "ml-3 font-bold " +
-                        +(color === "light" ? "text-slate-600" : "text-white")
-                      }
-                    >
-                      <Link href={`/admin/users/${user.walletAdress}`}>
-                        <a>
-                          {user.username}
-                        </a>
-                      </Link>
-                    </span>
-                  </th>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    <i className="fas fa-circle text-orange-500 mr-2"></i> {user.walletAdress}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {user.collections.length}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {user.nfts.length}
-                  </td>
-                  {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                return (
+                  <tr key={user._id}>
+                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                      <img
+                        src="/img/bootstrap.jpg"
+                        className="h-12 w-12 bg-white rounded-full border"
+                        alt="..."
+                      ></img>{" "}
+                      <span
+                        className={
+                          "ml-3 font-bold " +
+                          +(color === "light" ? "text-slate-600" : "text-white")
+                        }
+                      >
+                        <Link href={`/admin/users/${user.walletAdress}`}>
+                          <a>{user.username}</a>
+                        </Link>
+                      </span>
+                    </th>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      <i className="fas fa-circle text-orange-500 mr-2"></i>{" "}
+                      {user.walletAdress}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {user.collections.length}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {user.nfts.length}
+                    </td>
+                    {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                     <TableDropdown />
                   </td> */}
-                </tr>
+                  </tr>
+                );
               })}
-
             </tbody>
           </table>
         </div>

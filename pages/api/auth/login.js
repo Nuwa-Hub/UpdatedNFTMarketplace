@@ -36,6 +36,7 @@ export default async function handler(req, res) {
             const userToken = jwt.sign(
                 {
                     id: user._id,
+                    wallet:user.walletAdress,
                     isAdmin: false,
                 },
                 process.env.JWT_SEC,

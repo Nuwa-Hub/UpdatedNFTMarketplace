@@ -9,19 +9,18 @@ const RaffleCard = ({ nft }) => {
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
-
-
   //add bid
   const addRafbid = async () => {
-    
     try {
-      await bidforRaffle()
-      const newbid = { raffleId: nft.listId, bidder: user?.walletAdress, };
-      console.log("dfs")
+      await bidforRaffle();
+      const newbid = { raffleId: nft.listId, bidder: user?.walletAdress };
+      console.log("dfs");
       const res = await publicRequest.post(`/rafbid`, newbid);
 
       console.log(res.data);
-    } catch (err) {console.log(err)}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   async function bidforRaffle() {
@@ -57,51 +56,50 @@ const RaffleCard = ({ nft }) => {
 
   return (
     <div className="nft">
-    
-    <div className="main flex flex-col p-4 w-full">
-      <img
-        className="tokenImage rounded-lg h-64 max-w-full object-cover"
-        src={nft.Img}
-        alt="NFT"
-      />
-      <h2>{nft.NFTName}</h2>
-      <div className="tokenInfo flex items-center justify-between">
-        <div className="price">
-          <p>{nft.price} ETH</p>
+      <div className="main flex flex-col p-4 w-full">
+        <img
+          className="tokenImage rounded-lg h-64 max-w-full object-cover"
+          src={nft.Img}
+          alt="NFT"
+        />
+        <h2>{nft.NFTName}</h2>
+        <div className="tokenInfo flex items-center justify-between">
+          <div className="price">
+            <p>{nft.price} ETH</p>
+          </div>
+          <div className="duration">
+            <p>Visits - </p>
+            <p style={{ color: "red" }}> {nft.visits}</p>
+          </div>
         </div>
-        <div className="duration">
-          <p>Visits - </p>
-          <p style={{ color: "red" }}> {nft.visits}</p>
+        <div>
+          <p style={{ margin: "10px 0px" }}>
+            owner: <span>{nft.owner.slice(0, 10)}...</span>{" "}
+          </p>
         </div>
-      </div>
-      <div>
-        <p style={{ margin: "10px 0px" }}>
-          owner: <span>{nft.owner.slice(0,10)}...</span>{" "}
-        </p>
-      </div>
-      <div></div>
-      <hr />
-      <div className="creator">
-   
-        <button
-          type="button"
-          className="btn-primary  bg-gradient-to-r from-indigo-800 via-green-500 to-teal-20"
-          style={{
-            width: "100%",
-            padding: "10px",
-            fontSize: "15px",
-            border: "1px solid #383838",
-            color: "white",
-            fontWeight: "800",
-          }}
-          onClick={()=>{addRafbid()}}
-        >
-          Click Here For Bid
-        </button>
+        <div></div>
+        <hr />
+        <div className="creator">
+          <button
+            type="button"
+            className="btn-primary  bg-gradient-to-r from-indigo-800 via-green-500 to-teal-20"
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "15px",
+              border: "1px solid #383838",
+              color: "white",
+              fontWeight: "800",
+            }}
+            onClick={() => {
+              addRafbid();
+            }}
+          >
+            Click Here For Bid
+          </button>
+        </div>
       </div>
     </div>
-   
-  </div>
   );
 };
 

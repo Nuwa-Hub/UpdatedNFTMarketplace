@@ -1,51 +1,46 @@
-import axios from 'axios'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { publicRequest } from 'utils/requestMethods'
-
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { publicRequest } from "utils/requestMethods";
 
 
 export const userLogin = createAsyncThunk(
-  'user/login',
+  "user/login",
   async ({ walletAdress }, { rejectWithValue }) => {
     try {
       // configure header's Content-Type as JSON
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      };
 
       const { data } = await axios.post(
-        '/api/auth/login',
+        "/api/auth/login",
         { walletAdress },
         config
-      )
+      );
 
       // store user's token in local storage
-      sessionStorage.setItem('userToken', data.userToken)
-
-      return data
+      sessionStorage.setItem("userToken", data.userToken);
+      return data;
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message)
+        return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue(error.message)
+        return rejectWithValue(error.message);
       }
     }
   }
-)
+);
 
 //update developer
 export const updateCurrentUser = async (dispatch, user, id) => {
- 
   try {
     const res = await publicRequest.put(`/user/${id}`, user);
     //console.log(res.data);
     dispatch(updateUserSucces(res.data));
-  } catch (err) {
-    
-  }
+  } catch (err) {}
 };
 // export const registerUser = createAsyncThunk(
 //   'user/register',
@@ -73,28 +68,27 @@ export const updateCurrentUser = async (dispatch, user, id) => {
 // )
 
 export const getUserDetails = createAsyncThunk(
-  'user/getUserDetails',
+  "user/getUserDetails",
   async (arg, { getState, rejectWithValue }) => {
     try {
       // get user data from store
-      const { user } = getState()
+      const { user } = getState();
 
       // configure authorization header with user's token
       const config = {
         headers: {
           Authorization: `Bearer ${user.userToken}`,
         },
-      }
+      };
 
-      const { data } = await axios.get(`/api/auth/profile`, config)
-      return data
+      const { data } = await axios.get(`/api/auth/profile`, config);
+      return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message)
+        return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue(error.message)
+        return rejectWithValue(error.message);
       }
     }
   }
-)
-
+);

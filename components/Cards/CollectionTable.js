@@ -7,32 +7,43 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import Link from "next/link";
 
 export default function NFTTable({ color }) {
-  const [collections, setCollections] = useState(null)
-  const [isLoading, setLoading] = useState(false)
-  const tableHeader = ["Collection Name", "Owner", "Visits", "Description", "No of NFTs",];
+  const [collections, setCollections] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const tableHeader = [
+    "Collection Name",
+    "Owner",
+    "Visits",
+    "Description",
+    "No of NFTs",
+  ];
 
   function getCollections() {
     setLoading(true);
-    publicRequest.get("admin/collection").then((res) => {
-      setCollections(res.data);
-      setLoading(false);
-    }).catch((err) => {
-      console.log(err);
-    });
+    publicRequest
+      .get("admin/collection")
+      .then((res) => {
+        setCollections(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   useEffect(() => {
     getCollections();
-  }, [])
-  function blockUnBlockHandler(collection){
-    publicRequest.put(`admin/collection/${collection._id}`, { access: !collection.access })
-        .then((res) => {
-          getCollections();
-        }).catch((err) => {
-          console.log(err);
-        })
+  }, []);
+  function blockUnBlockHandler(collection) {
+    publicRequest
+      .put(`admin/collection/${collection._id}`, { access: !collection.access })
+      .then((res) => {
+        getCollections();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  if (isLoading) return <p>Loading...</p>
-  if (!collections) return <p>No collections data</p>
+  if (isLoading) return <p>Loading...</p>;
+  if (!collections) return <p>No collections data</p>;
   return (
     <>
       <div
@@ -60,9 +71,10 @@ export default function NFTTable({ color }) {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                {tableHeader.map(header => {
+                {tableHeader.map((header) => {
                   return (
-                    <th key={header}
+                    <th
+                      key={header}
                       className={
                         "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                         (color === "light"
@@ -73,44 +85,42 @@ export default function NFTTable({ color }) {
                       {header}
                     </th>
                   );
-                })
-                }
+                })}
               </tr>
             </thead>
             <tbody>
               {collections.map((collection) => {
-                return <tr key={collection._id}>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    <Link href={`/collection/${collection._id}`} >
-                      <a>
-                        {collection.collectionName}
-                      </a>
-                    </Link>
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {collection.owner}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {collection.visits}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {collection.description.substring(0, 50) + "..."}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {collection.nfts ? collection.nfts.length : 0}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                    <button
-                      className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => blockUnBlockHandler(collection)}
+                return (
+                  <tr key={collection._id}>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      <Link href={`/collection/${collection._id}`}>
+                        <a>{collection.collectionName}</a>
+                      </Link>
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {collection.owner}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {collection.visits}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {collection.description.substring(0, 50) + "..."}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {collection.nfts ? collection.nfts.length : 0}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                      <button
+                        className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => blockUnBlockHandler(collection)}
                       >
-                      {collection.access ? "Block" : "Unblock"}
-                    </button>
-                  </td>
-                </tr>
+                        {collection.access ? "Block" : "Unblock"}
+                      </button>
+                    </td>
+                  </tr>
+                );
               })}
-
             </tbody>
           </table>
         </div>

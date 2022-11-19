@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 
-import { getAllCollections, getCollectionByUserId } from "redux/actions/collectionAction";
+import {
+  getAllCollections,
+  getCollectionByUserId,
+} from "redux/actions/collectionAction";
 import { useDispatch, useSelector } from "react-redux";
 import { publicRequest } from "utils/requestMethods";
 import Collectioncard from "@/components/AllCollections/Collectioncard";
@@ -28,15 +31,17 @@ const explorecollection = () => {
   //console.log(collections);
   //const collections=[]
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser?.walletAdress);
+  const currentUser = useSelector(
+    (state) => state.user.currentUser?.walletAdress
+  );
   const collections = useSelector((state) => state.collection.collections);
- 
-  useEffect(() => {
-    if(currentUser){  
-        console.log(currentUser)
-        getCollectionByUserId(dispatch, currentUser);}
-  }, [dispatch,currentUser]);
 
+  useEffect(() => {
+    if (currentUser) {
+      console.log(currentUser);
+      getCollectionByUserId(dispatch, currentUser);
+    }
+  }, [dispatch, currentUser]);
 
   return (
     <div className="overflow-hidden">
@@ -51,7 +56,11 @@ const explorecollection = () => {
                 className="flex flex-wrap w-full  sm:w-full md:w-1/2 lg:w-1/3"
                 key={collection._id}
               >
-                <Collectioncard key={collection._id} collection={collection} user="user" />
+                <Collectioncard
+                  key={collection._id}
+                  collection={collection}
+                  user="user"
+                />
               </div>
             ))}
           </div>

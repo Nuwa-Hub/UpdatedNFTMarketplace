@@ -13,35 +13,37 @@ export default function UserView({ color }) {
   const router = useRouter();
   const user_id = router.query.user_id;
 
-
   useEffect(() => {
-    setLoading(true)
-    if (user_id)
-      getUser()
-  }, [user_id])
+    setLoading(true);
+    if (user_id) getUser();
+  }, [user_id]);
 
-  if (isLoading) return <p>Loading...</p>
-  if (!user) return <p>No profile data</p>
+  if (isLoading) return <p>Loading...</p>;
+  if (!user) return <p>No profile data</p>;
   // console.log(data);
   function getUser() {
-    setLoading(true)
-    publicRequest.get(`admin/user/${user_id}`)
+    setLoading(true);
+    publicRequest
+      .get(`admin/user/${user_id}`)
       .then((res) => {
-        setUser(res.data.user)
-        setLoading(false)
-        console.log(res.data)
-      }).catch((err) => {
-        console.log(err);
+        setUser(res.data.user);
+        setLoading(false);
+        console.log(res.data);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function blockUnBlockUser() {
     if (user)
-      publicRequest.put(`admin/user/${user._id}`, { access: !user.access })
+      publicRequest
+        .put(`admin/user/${user._id}`, { access: !user.access })
         .then((res) => {
-          getUser()
-        }).catch((err) => {
-          console.log(err);
+          getUser();
         })
+        .catch((err) => {
+          console.log(err);
+        });
   }
   return (
     <>
@@ -123,17 +125,19 @@ export default function UserView({ color }) {
                 </thead>
                 <tbody>
                   {user.collections.map((collection) => {
-                    return <tr key={collection._id}>
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        {collection.collectionName}
-                      </th>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        {collection.nfts ? collection.nfts.length : 0}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {collection.visits}
-                      </td>
-                    </tr>
+                    return (
+                      <tr key={collection._id}>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                          {collection.collectionName}
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          {collection.nfts ? collection.nfts.length : 0}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {collection.visits}
+                        </td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>
@@ -168,17 +172,19 @@ export default function UserView({ color }) {
                 </thead>
                 <tbody>
                   {user.nfts.map((nft) => {
-                    return <tr key={nft._id}>
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        {nft.NFTName}
-                      </th>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        {nft.collectionId}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {nft.visits}
-                      </td>
-                    </tr>
+                    return (
+                      <tr key={nft._id}>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                          {nft.NFTName}
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          {nft.collectionId}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {nft.visits}
+                        </td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>
@@ -219,23 +225,33 @@ export default function UserView({ color }) {
                 </thead>
                 <tbody>
                   {user.auctions.map((auction) => {
-                    return <tr key={auction._id}>
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        {auction.nft}
-                      </th>
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        {auction.status}
-                      </th>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        {auction.startingPrice}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        {user.bids.filter(bid => auction.bid.includes(bid._id))[0].value}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {user.bids.some((bid) => bid._id == auction.winningBid) ? "Yes" : "No"}
-                      </td>
-                    </tr>
+                    return (
+                      <tr key={auction._id}>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                          {auction.nft}
+                        </th>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                          {auction.status}
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          {auction.startingPrice}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          {
+                            user.bids.filter((bid) =>
+                              auction.bid.includes(bid._id)
+                            )[0].value
+                          }
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {user.bids.some(
+                            (bid) => bid._id == auction.winningBid
+                          )
+                            ? "Yes"
+                            : "No"}
+                        </td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>
@@ -285,5 +301,3 @@ export default function UserView({ color }) {
     </>
   );
 }
-
-
