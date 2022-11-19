@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import DecliningPriceSell from "./DecliningPriceSell";
 import HighestBidderSell from "./HighestBidderSell";
+
+
 const AuctionForm = ({nft}) => {
 	const [highest, setHighest] = useState(null);
 	return (

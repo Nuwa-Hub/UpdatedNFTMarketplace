@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNFTs, getNFTByUserId } from "redux/actions/NFTAction";
+import UserNFTCard from "@/components/UserNFTCard";
 
 const exploreNFT = () => {
   const ethers = require("ethers");
@@ -22,7 +23,7 @@ const exploreNFT = () => {
   return (
     <div className="overflow-hidden">
       <h1 className="text-6xl mt-3 font-mono tracking-tight text-bold dark:text-white">
-        Explore NFTs
+        My NFTs
       </h1>
       <div className="overflow-hidden text-gray-700">
         <div className="px-1 py-1 mx-auto lg:pt-12 lg:px-2">
@@ -33,7 +34,7 @@ const exploreNFT = () => {
                   className="flex flex-wrap w-full  sm:w-full md:w-1/2 lg:w-1/4"
                   key={index}
                 >
-                  <NFTCard nft={item} user="user" />
+                  <UserNFTCard nft={item} user="user" />
                 </div>
               ))}
           </div>

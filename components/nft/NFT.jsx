@@ -11,7 +11,11 @@ import { getNFTByNftId, updateNFTByNFTId } from "redux/actions/NFTAction";
 import HighestBidModal from "./HighestBidModal";
 import BuyNowModal from "./BuyNowModal";
 import { publicRequest } from "utils/requestMethods";
-import { addFavourite, deleteFavourite, getAllFavouritesByUserId } from "redux/actions/FavouriteAction";
+import {
+  addFavourite,
+  deleteFavourite,
+  getAllFavouritesByUserId,
+} from "redux/actions/FavouriteAction";
 
 const Nft = () => {
   const [message, updateMessage] = useState("");
@@ -114,6 +118,7 @@ const Nft = () => {
     console.log(price);
     return price;
   }
+
 
   async function listNFT() {
     //Upload data to IPFS
@@ -226,7 +231,6 @@ const Nft = () => {
   }
   //console.log(buy)
   //end of the nft blockchain ++++++++++++++++++++++
-
 
   //add favourite
 

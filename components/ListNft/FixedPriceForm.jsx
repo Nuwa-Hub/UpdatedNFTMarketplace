@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const FixedPriceForm = ({ nft }) => {
   const router = useRouter();
@@ -16,9 +19,7 @@ const FixedPriceForm = ({ nft }) => {
       price: "",
     },
     validationSchema: Yup.object({
-      price: Yup.number()
-        
-        .positive("Price must be positive"),
+      price: Yup.number().positive("Price must be positive"),
     }),
   });
 
@@ -51,15 +52,28 @@ const FixedPriceForm = ({ nft }) => {
 
       // const newnft = { isListed: false, owner: user.walletAdress };
       // updateNFTByUserId(distpatch, newnft, nft._id);
-      alert("You successfully list the NFT!");
+      //alert("You successfully list the NFT!");
     } catch (e) {
       alert("Upload Error" + e);
     }
   }
+   //this is for notify messages
+   function notify(msg) {
+    toast(msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
 
   async function handleSubmited(e) {
     e.preventDefault();
-    console.log(nft)
+    console.log(nft);
     if (nft.mint == true) {
       console.log("list");
       await listingNFT();
@@ -69,14 +83,22 @@ const FixedPriceForm = ({ nft }) => {
         nft: router.query.id,
         seller: user.currentUser.walletAdress,
       };
-      console.log(values);
+      //console.log(values);
       publicRequest
         .post("listing", values)
         .then((res) => {
-          console.log(res);
+          notify("NFT Listed Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
         })
         .catch((err) => {
-          console.log(err);
+          notify("Somthing Went Wrong!");
+          //console.log(err);
         });
     } else {
       console.log("mint");
@@ -89,16 +111,25 @@ const FixedPriceForm = ({ nft }) => {
       publicRequest
         .post("listing", values)
         .then((res) => {
-          console.log(res);
+          notify("NFT Listed Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
         })
         .catch((err) => {
-          console.log(err);
+          notify("Somthing Went Wrong!");
+          //console.log(err);
         });
-      console.log(values);
+     // console.log(values);
     }
   }
   return (
     <form onSubmit={formik.handleSubmited}>
+      <ToastContainer />
       <div className="text-xl mx-2 font-mono tracking-tight text-bold dark:text-white">
         Price
       </div>

@@ -6,10 +6,28 @@ import { publicRequest, userRequest } from "utils/requestMethods";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Raffle = ({ nft }) => {
   const router = useRouter();
   const user = useSelector((state) => state.user);
+
+   //this is for notify messages
+   function notify(msg) {
+    toast(msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+
+
 
   const hexToDecimal = (hex) => parseInt(hex, 16);
 
@@ -64,10 +82,19 @@ const Raffle = ({ nft }) => {
         publicRequest
           .post("raffle", values)
           .then((res) => {
-            console.log(res);
+           // console.log(res);
+            notify("NFT Add To Raffle Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
           })
           .catch((err) => {
-            console.log(err);
+            notify("Somthing Went Wrong!");
+            //console.log(err);
           });
         console.log(values);
       } else {
@@ -79,10 +106,19 @@ const Raffle = ({ nft }) => {
         publicRequest
           .post("raffle", values)
           .then((res) => {
-            console.log(res);
+            //console.log(res);
+            notify("NFT Add To Raffle Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
           })
           .catch((err) => {
-            console.log(err);
+            notify("Somthing Went Wrong!");
+           // console.log(err);
           });
         console.log(values);
       }
@@ -100,6 +136,7 @@ const Raffle = ({ nft }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+    <ToastContainer />
       <div className="text-xl mx-2 font-mono tracking-tight text-bold dark:text-white">
         Fixed Raffle amount
       </div>
@@ -122,11 +159,11 @@ const Raffle = ({ nft }) => {
               className="w-full h-20  p-4 border-0"
               type="number"
               name="fixedValue"
-              id="price"
+              id="fixedValue"
               placeholder="Amount"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.price}
+              value={formik.values.fixedValue}
             />
           </div>
           {formik.touched.price && formik.errors.price ? (

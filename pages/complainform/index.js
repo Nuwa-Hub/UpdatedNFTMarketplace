@@ -1,5 +1,7 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function index() {
 
@@ -10,6 +12,20 @@ export default function index() {
         email: "",
         message: "",
     });
+
+    //this is for notify messages
+  function notify(msg) {
+    toast(msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
 
     const sendEmail = () => {
 
@@ -23,10 +39,10 @@ export default function index() {
             )
             .then(
                 (result) => {
-                    console.log("d");
+                    notify("Complaint added Successfully!");
                 },
                 (error) => {
-                    console.log("s");
+                    notify("Something went wrong!");
                 }
             );
     };
@@ -42,6 +58,7 @@ export default function index() {
     return (
         <>
             <div>
+            <ToastContainer />
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="md:col-span-1">
                         <div className="px-4 sm:px-0">
@@ -80,8 +97,8 @@ export default function index() {
                                                     id="company-website"
                                                     className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     placeholder="Tedd Codd"
-                                                    pattern="[A-Za-z]"
-                                                    title="only includ"
+                                                    
+                                                    title="only include letters"
                                                 />
                                             </div>
                                         </div>

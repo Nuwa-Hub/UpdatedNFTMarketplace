@@ -51,6 +51,6 @@ export const {
   getCollectionStart,
 } = collectionSlice.actions;
 
-export const selectValue = (state) => state.collection.value;
+
 
 export default collectionSlice.reducer;

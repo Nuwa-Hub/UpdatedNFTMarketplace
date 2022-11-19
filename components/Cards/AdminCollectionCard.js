@@ -7,12 +7,15 @@ import { publicRequest } from "utils/requestMethods";
 export default function AdminCollectionCard() {
   const [collections, setCollections] = useState([]);
   useEffect(() => {
-    publicRequest.get("admin/collection?limit=5").then((res) => {
-      setCollections(res.data);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }, [])
+    publicRequest
+      .get("admin/collection?limit=5")
+      .then((res) => {
+        setCollections(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -24,10 +27,8 @@ export default function AdminCollectionCard() {
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <Link href='/admin/collections'>
-                <a
-                  className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                >
+              <Link href="/admin/collections">
+                <a className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                   See all
                 </a>
               </Link>
@@ -52,17 +53,19 @@ export default function AdminCollectionCard() {
             </thead>
             <tbody>
               {collections.map((collection) => {
-                return <tr key={collection._id}>
-                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                    {collection.collectionName}
-                  </th>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                    {collection.nfts ? collection.nfts.length : 0}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {collection.visits}
-                  </td>
-                </tr>
+                return (
+                  <tr key={collection._id}>
+                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                      {collection.collectionName}
+                    </th>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                      {collection.nfts ? collection.nfts.length : 0}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {collection.visits}
+                    </td>
+                  </tr>
+                );
               })}
             </tbody>
           </table>

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentUser } from "redux/actions/userActions";
 
 /*
   This example requires some changes to your config:
@@ -15,19 +17,26 @@ import { useState } from "react";
   ```
 */
 export default function UpdateUser() {
-    const [inputs, setInputs] = useState({});
-    const [file, setFile] = useState(null);
+  const [inputs, setInputs] = useState({});
+  const [file, setFile] = useState(null);
 
-    const handleChange = (e) => {
-        setInputs((prev) => {
-          return { ...prev, [e.target.name]: e.target.value };
-        });
-      };
-      console.log(inputs)
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs);
+    updateCurrentUser(dispatch,inputs,currentUser._id)
+  };
   return (
     <>
       <div>
-        <form>
+      
           <div>
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
@@ -92,7 +101,6 @@ export default function UpdateUser() {
                       </p>
                     </div>
 
-
                     <div className="grid grid-cols-3 gap-6">
                       <div className="col-span-3 sm:col-span-2">
                         <label
@@ -102,11 +110,11 @@ export default function UpdateUser() {
                           Username
                         </label>
                         <div className="mt-1 flex rounded-md shadow-sm">
-                         <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                          <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
                             +94
-                          </span> 
+                          </span>
                           <input
-                              onChange={handleChange}
+                            onChange={handleChange}
                             type="text"
                             name="telNo"
                             id="company-website"
@@ -116,7 +124,6 @@ export default function UpdateUser() {
                         </div>
                       </div>
                     </div>
-
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
@@ -146,7 +153,6 @@ export default function UpdateUser() {
                           className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           placeholder="abc"
                           onChange={(e) => setFile(e.target.files[0])}
-                          
                         />
                       </div>
                     </div>
@@ -243,12 +249,10 @@ export default function UpdateUser() {
                           autoComplete="country-name"
                           className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         />
-                          {/* <option>United States</option>
+                        {/* <option>United States</option>
                           <option>Canada</option>
                           <option>Mexico</option> */}
-                    
                       </div>
-
 
                       <div className="col-span-6">
                         <label
@@ -267,7 +271,6 @@ export default function UpdateUser() {
                         />
                       </div>
 
-                     
                       <div className="col-span-6">
                         <label
                           htmlFor="street-address"
@@ -284,13 +287,11 @@ export default function UpdateUser() {
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                       </div>
-                     
-                   
                     </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                     <button
-                      type="submit"
+                      onClick={handleSubmit}
                       className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Save
@@ -300,7 +301,7 @@ export default function UpdateUser() {
               </div>
             </div>
           </div>
-        </form>
+       
       </div>
     </>
   );

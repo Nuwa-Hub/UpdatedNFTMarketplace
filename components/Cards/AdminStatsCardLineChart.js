@@ -26,35 +26,35 @@ export default function AdminStatsCardLineChart() {
         ],
         datasets: [
           {
-            label: 'NFTs',
+            label: "NFTs",
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
             data: data.nfts,
             fill: false,
           },
           {
-            label: 'Collections',
+            label: "Collections",
             fill: false,
             backgroundColor: "#fff",
             borderColor: "#fff",
             data: data.collections,
           },
           {
-            label: 'Listings',
+            label: "Listings",
             fill: false,
             backgroundColor: "#f0f",
             borderColor: "#f0f",
             data: data.listings,
           },
           {
-            label: 'Auctions',
+            label: "Auctions",
             fill: false,
             backgroundColor: "#0ff",
             borderColor: "#0ff",
             data: data.auctions,
           },
           {
-            label: 'Raffles',
+            label: "Raffles",
             fill: false,
             backgroundColor: "#ff0",
             borderColor: "#ff0",
@@ -142,25 +142,26 @@ export default function AdminStatsCardLineChart() {
   }
 
   useEffect(() => {
-    setLoading(true)
-    publicRequest.get('admin/stats')
+    setLoading(true);
+    publicRequest
+      .get("admin/stats")
       .then((res) => {
-        const data = {}
+        const data = {};
         for (const property in res.data) {
-          let row = new Array(12).fill(0)
+          let row = new Array(12).fill(0);
           for (let i = 0; i < 12; i++) {
-            let obj = res.data[property].find(obj => obj._id.month == i + 1)
+            let obj = res.data[property].find((obj) => obj._id.month == i + 1);
             if (obj) {
-              row[i] = obj.count
+              row[i] = obj.count;
             }
           }
-          data[property] = row
+          data[property] = row;
         }
-        setData(data)
-        setLoading(false)
-        console.log("data", data)
+        setData(data);
+        setLoading(false);
+        console.log("data", data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
