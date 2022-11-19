@@ -5,6 +5,9 @@ import { publicRequest, userRequest } from "utils/requestMethods";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const DecliningPriceSell = ({ nft }) => {
   const router = useRouter();
@@ -45,6 +48,19 @@ const DecliningPriceSell = ({ nft }) => {
     }
   }
 
+    //this is for notify messages
+    function notify(msg) {
+      toast(msg, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   const formik = useFormik({
     initialValues: {
       startingPrice: "",
@@ -61,15 +77,22 @@ const DecliningPriceSell = ({ nft }) => {
           ...values,
           nft: router.query.id,
           owner: user.currentUser.walletAdress,
-          auctionType: "dec",
+          auctionType: "Decreasing",
         };
         publicRequest
           .post("auction", values)
           .then((res) => {
-            console.log(res);
+            notify("NFT Listed Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
           })
           .catch((err) => {
-            console.log(err);
+            notify("Somthing Went Wrong!");
           });
         console.log(values);
       } else {
@@ -77,17 +100,26 @@ const DecliningPriceSell = ({ nft }) => {
           ...values,
           nft: router.query.id,
           owner: user.currentUser.walletAdress,
-          auctionType: "dec",
+          auctionType: "Decreasing",
         };
         publicRequest
           .post("auction", values)
           .then((res) => {
-            console.log(res);
+            notify("NFT Listed Successfully!");
+            //alert("Collection Created");
+
+            setTimeout(() => {
+              router.push({
+                pathname: "/nft/user",
+              });
+            }, "3000");
           })
           .catch((err) => {
+            notify("Somthing Went Wrong!");
             console.log(err);
           });
         console.log(values);
+        
       }
     },
     validationSchema: Yup.object({
@@ -110,6 +142,7 @@ const DecliningPriceSell = ({ nft }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+    <ToastContainer />
       <div className="text-xl mx-2 mt-5 font-mono tracking-tight text-bold dark:text-white">
         Starting Price
       </div>

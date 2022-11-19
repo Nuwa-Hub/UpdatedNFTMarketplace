@@ -173,16 +173,10 @@ const Navbar = () => {
           </button> */}
           {/* <ConnectButton  moralisAuth={true} /> */}
         </div>
-
         <ConnectWalletButton />
+      
 
-        <div className="md:hidden mr-4" onClick={handleClick}>
-          {/* {!nav ? (
-						<MenuIcon className="w-5" />
-					) : (
-						<XIcon className="w-5" />
-					)} */}
-        </div>
+   
       </div>
 
       <ul className={!nav ? "hidden" : "absolute bg-zinc-200 w-full px-8"}>

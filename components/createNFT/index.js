@@ -10,6 +10,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { storage } from "common/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 //select options
 
 const CreateNFT = () => {
@@ -22,6 +23,8 @@ const CreateNFT = () => {
 
 	const currentUser = useSelector((state) => state.user.currentUser);
 	const collections = useSelector((state) => state.collection.collections);
+
+	const router = useRouter();
 
 	useEffect(() => {
 		getAllCollections(dispatch);
@@ -66,6 +69,13 @@ const CreateNFT = () => {
 						//call add nft fuction
 						addNFTs(dispatch, newNFT);
 						notify("Create NFT successfully!");
+						
+                        setTimeout(() => {
+							router.push({
+							  pathname: "/nft/user",
+							});
+						  }, "3000");
+					
 						// alert("Create NFT successfully!");
 					})
 					.catch((err) => {
