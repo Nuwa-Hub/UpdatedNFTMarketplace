@@ -46,6 +46,7 @@ const Nft = () => {
     }
     user?._id && getAllFavouritesByUserId(distpatch, user?._id);
   }, [distpatch, nft_id]);
+  console.log(nft);
 
   //get relevent nft by NFT array
   //const nft = useSelector((state) => state.NFT.NFT);
@@ -139,9 +140,13 @@ const Nft = () => {
         Marketplace.abi,
         signer
       );
-
+      let newwPrice = nft.price.toString()
+      if(nft.listType=="Decreasing"){
+        const curprice=getCurrentPriceForDecreasingAuction();
+         newwPrice = curprice.toString()
+      }
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits("0.001", "ether");
+      const price = ethers.utils.parseUnits(newwPrice, "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 
@@ -194,8 +199,14 @@ const Nft = () => {
         Marketplace.abi,
         signer
       );
-      const curprice=getCurrentPriceForDecreasingAuction();
-      const salePrice = ethers.utils.parseUnits("0.001", "ether");
+      
+      let newwPrice = nft.price.toString()
+      if(nft.listType=="Decreasing"){
+        const curprice=getCurrentPriceForDecreasingAuction();
+         newwPrice = curprice.toString()
+      }
+      //massage the params to be sent to the create NFT request
+      const price = ethers.utils.parseUnits(newwPrice, "ether");
       updateMessage("Buying the NFT... Please Wait (Upto 5 mins)");
       //run the executeSale function
       //let owner = await contract.withdraw()
