@@ -7,38 +7,38 @@ const index = () => {
       <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
           {/* <!-- Left Side --> */}
-          <div class="w-full md:w-3/12 md:mx-2">
+          <div className="w-full md:w-3/12 md:mx-2">
             {/* <!-- Profile Card --> */}
-            <div class="bg-white p-3 border-t-4 border-green-400">
-              <div class="image overflow-hidden">
-                <img class="h-auto w-full mx-auto" src="/dp.jpeg" alt="" />
+            <div className="bg-white p-3 border-t-4 border-green-400">
+              <div className="image overflow-hidden">
+                <img className="h-auto w-full mx-auto" src="/dp.jpeg" alt="" />
               </div>
-              <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">
+              <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
                 Shilpa Maniyan
               </h1>
-              <h3 class="text-gray-600 font-lg text-semibold leading-6">
+              <h3 className="text-gray-600 font-lg text-semibold leading-6">
                 Owner at Her Company Inc.
               </h3>
-              <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">
+              <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur
                 non deserunt
               </p>
-              <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                <li class="flex items-center py-3">
+              <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                <li className="flex items-center py-3">
                   <span>Member since</span>
-                  <span class="ml-auto">Nov 07, 2016</span>
+                  <span className="ml-auto">Nov 07, 2016</span>
                 </li>
               </ul>
             </div>
             {/* <!-- End of profile card --> */}
-            <div class="my-4"></div>
+            <div className="my-4"></div>
             {/* <!-- Friends card --> */}
-            <div class="bg-white p-3 hover:shadow">
-              <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                <span class="text-green-500">
+            <div className="bg-white p-3 hover:shadow">
+              <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                <span className="text-green-500">
                   <svg
-                    class="h-5 fill-current"
+                    className="h-5 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -54,52 +54,52 @@ const index = () => {
                 </span>
                 <span>My Fovourites</span>
                 <Link href="favourite/">
-                      <button
-                        type="button"
-                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                      >
-                        Go
-                      </button>
-                    </Link>
+                  <button
+                    type="button"
+                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  >
+                    Go
+                  </button>
+                </Link>
               </div>
-              <div class="grid grid-cols-3">
-                <div class="text-center my-2">
+              <div className="grid grid-cols-3">
+                <div className="text-center my-2">
                   <img
-                    class="h-16 w-16 rounded-full mx-auto"
+                    className="h-16 w-16 rounded-full mx-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/nft-Thu%20Nov%2003%202022%2013%3A44%3A54%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=ca790875-c4c0-4065-9a86-5c3ef2b4eefa"
                     alt=""
                   />
-                  <a href="#" class="text-main-color">
+                  <a href="#" className="text-main-color">
                     Kojstantin
                   </a>
                 </div>
-                <div class="text-center my-2">
+                <div className="text-center my-2">
                   <img
-                    class="h-16 w-16 rounded-full mx-auto"
+                    className="h-16 w-16 rounded-full mx-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/ProfileImg-Wed%20Sep%2028%202022%2011%3A23%3A38%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=c97ca83d-8d50-43e4-82cc-175858c911f7"
                     alt=""
                   />
-                  <a href="#" class="text-main-color">
+                  <a href="#" className="text-main-color">
                     James
                   </a>
                 </div>
-                <div class="text-center my-2">
+                <div className="text-center my-2">
                   <img
-                    class="h-16 w-16 rounded-full mx-auto"
+                    className="h-16 w-16 rounded-full mx-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/nft-Mon%20Nov%2014%202022%2014%3A18%3A56%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=bdcaff0b-a695-456f-85c6-6a9e2a8565cb"
                     alt=""
                   />
-                  <a href="#" class="text-main-color">
+                  <a href="#" className="text-main-color">
                     Natie
                   </a>
                 </div>
-                <div class="text-center my-2">
+                <div className="text-center my-2">
                   <img
-                    class="h-16 w-16 rounded-full mx-auto"
+                    className="h-16 w-16 rounded-full mx-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Thu%20Nov%2003%202022%2013%3A45%3A32%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=542259eb-69be-4cef-a962-6ca6e32b5585"
                     alt=""
                   />
-                  <a href="#" class="text-main-color">
+                  <a href="#" className="text-main-color">
                     Casey
                   </a>
                 </div>
@@ -108,14 +108,14 @@ const index = () => {
             {/* <!-- End of friends card --> */}
           </div>
           {/* <!-- Right Side --> */}
-          <div class="w-full md:w-9/12 mx-2 h-64">
+          <div className="w-full md:w-9/12 mx-2 h-64">
             {/* <!-- Profile tab -->
                 <!-- About Section --> */}
-            <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+            <div className="bg-white p-3 shadow-sm rounded-sm">
+              <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                 <span clas="text-green-500">
                   <svg
-                    class="h-5"
+                    className="h-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -129,66 +129,66 @@ const index = () => {
                     />
                   </svg>
                 </span>
-                <span class="tracking-wide">About</span>
+                <span className="tracking-wide">About</span>
               </div>
-              <div class="text-gray-700">
-                <div class="grid md:grid-cols-2 text-sm">
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">First Name</div>
-                    <div class="px-4 py-2">Jane</div>
+              <div className="text-gray-700">
+                <div className="grid md:grid-cols-2 text-sm">
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">First Name</div>
+                    <div className="px-4 py-2">Jane</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Last Name</div>
-                    <div class="px-4 py-2">Doe</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Last Name</div>
+                    <div className="px-4 py-2">Doe</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Gender</div>
-                    <div class="px-4 py-2">Female</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Gender</div>
+                    <div className="px-4 py-2">Female</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Contact No.</div>
-                    <div class="px-4 py-2">+11 998001001</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Contact No.</div>
+                    <div className="px-4 py-2">+11 998001001</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Current Address</div>
-                    <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Current Address</div>
+                    <div className="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                    <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Permanant Address</div>
+                    <div className="px-4 py-2">Arlington Heights, IL, Illinois</div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Email.</div>
-                    <div class="px-4 py-2">
-                      <a class="text-blue-800" href="mailto:jane@example.com">
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Email.</div>
+                    <div className="px-4 py-2">
+                      <a className="text-blue-800" href="mailto:jane@example.com">
                         jane@example.com
                       </a>
                     </div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Birthday</div>
-                    <div class="px-4 py-2">Feb 06, 1998</div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Birthday</div>
+                    <div className="px-4 py-2">Feb 06, 1998</div>
                   </div>
                 </div>
               </div>
               <Link href="updateuser/">
-                <button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
+                <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
                   Edit Information
                 </button>
               </Link>
             </div>
             {/* <!-- End of about section --> */}
 
-            <div class="my-4"></div>
+            <div className="my-4"></div>
 
             {/* <!-- Experience and education --> */}
-            <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div class="grid grid-cols-2">
+            <div className="bg-white p-3 shadow-sm rounded-sm">
+              <div className="grid grid-cols-2">
                 <div>
-                  <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                     <span clas="text-green-500">
                       <svg
-                        class="h-5"
+                        className="h-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -202,48 +202,48 @@ const index = () => {
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Listing History</span>
+                    <span className="tracking-wide">Listing History</span>
                   </div>
-                  <ul class="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
+                  <ul className="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Owner at Her Company Inc.</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                     <span clas="text-green-500">
                       <svg
-                        class="h-5"
+                        className="h-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -262,16 +262,16 @@ const index = () => {
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Bidding History</span>
+                    <span className="tracking-wide">Bidding History</span>
                   </div>
-                  <ul class="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
+                  <ul className="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
                     <li>
-                      <div class="text-teal-600">Masters Degree in Oxford</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Masters Degree in Oxford</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Bachelors Degreen in LPU</div>
+                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
                     </li>
                   </ul>
                 </div>
@@ -280,15 +280,15 @@ const index = () => {
             </div>
             {/* <!-- End of profile tab --> */}
 
-            <div class="my-4"></div>
+            <div className="my-4"></div>
             {/* <!-- Experience and education --> */}
-            <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div class="grid grid-cols-2">
-                <div class="bg-white p-3 hover:shadow">
-                  <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                    <span class="text-green-500">
+            <div className="bg-white p-3 shadow-sm rounded-sm">
+              <div className="grid grid-cols-2">
+                <div className="bg-white p-3 hover:shadow">
+                  <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                    <span className="text-green-500">
                       <svg
-                        class="h-5 fill-current"
+                        className="h-5 fill-current"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -306,60 +306,60 @@ const index = () => {
                     <Link href="collection/user">
                       <button
                         type="button"
-                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                        className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                       >
                         Go
                       </button>
                     </Link>
                   </div>
-                  <div class="grid grid-cols-3">
-                    <div class="text-center my-2">
+                  <div className="grid grid-cols-3">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16 mx-auto"
+                        className="h-16 w-16 mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Wed%20Nov%2002%202022%2010%3A25%3A35%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=75900de2-e82b-434b-a4e3-426585a1a6f1"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Dogss loverssss
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Thu%20Nov%2003%202022%2013%3A45%3A32%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=542259eb-69be-4cef-a962-6ca6e32b55854"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Art scripts areaa
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/ProfileImg-Wed%20Nov%2016%202022%2006%3A21%3A51%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=01cd6313-3434-43aa-af4a-12e4048d21b8"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Natie
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/BannerImg-Sun%20Nov%2013%202022%2011%3A36%3A37%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=db5b83a1-6ee1-4083-97d8-1a0cbc3011c6"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Game Plazzaaa
                       </a>
                     </div>
                   </div>
                 </div>
-                <div class="bg-white p-3 hover:shadow">
-                  <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                    <span class="text-green-500">
+                <div className="bg-white p-3 hover:shadow">
+                  <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                    <span className="text-green-500">
                       <svg
-                        class="h-5 fill-current"
+                        className="h-5 fill-current"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -377,50 +377,50 @@ const index = () => {
                     <Link href="nft/user">
                       <button
                         type="button"
-                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                        className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                       >
                         Go
                       </button>
                     </Link>
                   </div>
-                  <div class="grid grid-cols-3">
-                    <div class="text-center my-2">
+                  <div className="grid grid-cols-3">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/1.jpeg?alt=media&token=168bcc19-4b51-4dd8-a985-6a8179b20ff3"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Kojstantin
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/2.jpeg?alt=media&token=9ab80e18-8147-4fca-94fb-40d340dae154"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         James
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/3.jpeg?alt=media&token=23578fd9-1af3-4a7c-b848-da158bb9abc8"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Natie
                       </a>
                     </div>
-                    <div class="text-center my-2">
+                    <div className="text-center my-2">
                       <img
-                        class="h-16 w-16  mx-auto"
+                        className="h-16 w-16  mx-auto"
                         src="https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/4.jpeg?alt=media&token=9a848288-562f-4434-aa3b-d080167d91aa"
                         alt=""
                       />
-                      <a href="#" class="text-main-color">
+                      <a href="#" className="text-main-color">
                         Casey
                       </a>
                     </div>

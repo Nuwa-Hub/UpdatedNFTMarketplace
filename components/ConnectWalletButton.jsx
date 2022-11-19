@@ -120,7 +120,7 @@ const ConnectWalletButton = () => {
 			<div className="relative group p-2">
 				{data.walletButton}
 
-				<div class="absolute w-full invisible group-hover:visible bg-transparent p-4">
+				<div className="absolute w-full invisible group-hover:visible bg-transparent p-4">
 					<div>
 						<div className="text-black truncate w-full">
 							Address : {data.address}

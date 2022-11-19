@@ -23,7 +23,7 @@ const CollectionHeader = () => {
           src={collection?.profileImg} // profile image
           className="absolute inset-y-28 left-16 md:inset-y-52  md:bottom-32 bg-purple-300 rounded-full h-36 w-36 md:h-56 md:w-56 "
         >
-          {/* <img src="/im.jpg" class="object-cover" alt="Image alt text" /> */}
+          {/* <img src="/im.jpg" className="object-cover" alt="Image alt text" /> */}
         </img>
       </div>
 
