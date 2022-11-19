@@ -139,7 +139,7 @@ const Nft = () => {
       );
 
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits("0.01", "ether");
+      const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 

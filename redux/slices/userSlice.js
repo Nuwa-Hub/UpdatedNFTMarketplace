@@ -18,9 +18,9 @@ const userSlice = createSlice({
             state.currentUser = null;
             state.userToken = null;
         },
-        updateUserSuccess: (state,action) => {
-            state.currentUser = action.payload;   
-        },
+        // updateUserSuccess: (state,action) => {
+        //     state.currentUser = action.payload;   
+        // },
     },
     extraReducers: {
         [userLogin.fulfilled]: (state, action) => {
@@ -30,6 +30,7 @@ const userSlice = createSlice({
         [getUserDetails.fulfilled]: (state, action) => {
             state.currentUser = action.payload.user;
         }
+  
     }
 });
 

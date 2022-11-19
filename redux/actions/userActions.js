@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { publicRequest } from "utils/requestMethods";
+//import { updateUserSuccess } from "redux/slices/userSlice";
 
 
 export const userLogin = createAsyncThunk(
@@ -39,7 +40,7 @@ export const updateCurrentUser = async (dispatch, user, id) => {
   try {
     const res = await publicRequest.put(`/user/${id}`, user);
     //console.log(res.data);
-    dispatch(updateUserSucces(res.data));
+   // dispatch(updateUserSucces(res.data));
   } catch (err) {}
 };
 // export const registerUser = createAsyncThunk(
