@@ -16,6 +16,7 @@ import {
   deleteFavourite,
   getAllFavouritesByUserId,
 } from "redux/actions/FavouriteAction";
+import DecreasingPriceBidModel from "./DecreasingPriceBidModel";
 
 const Nft = () => {
   const [message, updateMessage] = useState("");
@@ -99,6 +100,7 @@ const Nft = () => {
       console.log("error uploading JSON metadata:", e);
     }
   }
+  console.log(list)
   function getCurrentPriceForDecreasingAuction() {
     const currentDate = new Date();
     const startDate = new Date(list.startDate);
@@ -108,10 +110,10 @@ const Nft = () => {
     const currentDurationHours = Math.floor(
       (currentDate.getTime() - startDate.getTime()) / 1000 / 60 / 60
     );
-    const startPrice = list.startPrice;
-    const endPrice = list.endPrice;
-
-    const price = +(
+    const startPrice = list.startingPrice;
+    const endPrice = list.endingPrice;
+    console.log(startPrice)
+    const price = (
       startPrice -
       (startPrice - endPrice) * (currentDurationHours / durationHours)
     ).toFixed(8);
@@ -139,7 +141,7 @@ const Nft = () => {
       );
 
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
+      const price = ethers.utils.parseUnits("0.001", "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 
@@ -192,7 +194,8 @@ const Nft = () => {
         Marketplace.abi,
         signer
       );
-      const salePrice = ethers.utils.parseUnits("0.025", "ether");
+      const curprice=getCurrentPriceForDecreasingAuction();
+      const salePrice = ethers.utils.parseUnits("0.001", "ether");
       updateMessage("Buying the NFT... Please Wait (Upto 5 mins)");
       //run the executeSale function
       //let owner = await contract.withdraw()
@@ -417,10 +420,11 @@ const Nft = () => {
                         >
                           {buy && (
                             <div>
-                              <BuyNowModal
+                              <DecreasingPriceBidModel
                                 executebuyNFT={executebuyNFT}
                                 setBuy={setBuy}
                                 buy={buy}
+                                currentprice={getCurrentPriceForDecreasingAuction()}
                               />
                             </div>
                           )}
