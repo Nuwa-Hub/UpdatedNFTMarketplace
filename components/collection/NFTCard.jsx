@@ -69,8 +69,8 @@ export default function NFTCard() {
 
 	return (
 		<section className="overflow-hidden text-gray-700 ">
-			<div class="m-10 bg-white shadow-md block">
-				<div class="p-2 w-full flex">
+			<div className="m-10 bg-white shadow-md block">
+				<div className="p-2 w-full flex">
 					<div className="w-1/6 ml-12">
 						<IoFilter size={30} />
 					</div>
@@ -78,9 +78,9 @@ export default function NFTCard() {
 						{!lowToHigh && (
 							<button
 								onClick={() => handleFilter(1, nfts)}
-								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
+								className="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
-								<span class="w-full flex align-middle">
+								<span className="w-full flex align-middle">
 									Price low to high
 								</span>
 							</button>
@@ -91,11 +91,11 @@ export default function NFTCard() {
 									setLowToHigh(false);
 									setFilter(false);
 								}}
-								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
+								className="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
-								<span class="w-full inline-flex leading-4 align-middle">
+								<span className="w-full inline-flex leading-4 align-middle">
 									<svg
-										class="fill-current w-4 mr-2 h-4"
+										className="fill-current w-4 mr-2 h-4"
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 									>
@@ -108,9 +108,9 @@ export default function NFTCard() {
 						{!highToLow && (
 							<button
 								onClick={() => handleFilter(2, nfts)}
-								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
+								className="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
-								<span class="w-full flex align-middle">
+								<span className="w-full flex align-middle">
 									Price high to low
 								</span>
 							</button>
@@ -121,11 +121,11 @@ export default function NFTCard() {
 									setHighToLow(false);
 									setFilter(false);
 								}}
-								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
+								className="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
-								<span class="w-full inline-flex leading-4 align-middle">
+								<span className="w-full inline-flex leading-4 align-middle">
 									<svg
-										class="fill-current w-4 mr-2 h-4"
+										className="fill-current w-4 mr-2 h-4"
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 									>
@@ -138,9 +138,9 @@ export default function NFTCard() {
 						{!mostFavorite && (
 							<button
 								onClick={() => handleFilter(3, nfts)}
-								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
+								className="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
-								<span class="w-full flex align-middle">
+								<span className="w-full flex align-middle">
 									Most Favourite
 								</span>
 							</button>
@@ -148,11 +148,11 @@ export default function NFTCard() {
 						{mostFavorite && (
 							<button
 								onClick={() => setMostFavorite(false)}
-								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
+								className="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
-								<span class="w-full inline-flex leading-4 align-middle">
+								<span className="w-full inline-flex leading-4 align-middle">
 									<svg
-										class="fill-current w-4 mr-2 h-4"
+										className="fill-current w-4 mr-2 h-4"
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 									>

@@ -144,7 +144,7 @@ const Message = ({ notification }) => {
                     <span className="font-semibold tracking-tight text-[20px]">{nft.name}</span>
                     <span className="text-xs leading-none opacity-50 ml-1">You already win this NFT please accept using the blue button bellow </span>
 
-                    <button onClick={executebuyNFT} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 w-24 h-8 mt-2 mb-2 rounded">
+                    <button onClick={executebuyNFT} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 w-24 h-8 mt-2 mb-2 rounded">
                         Accept NFT
                     </button>
                     <span className="text-[14px] text-blue-500 font-medium leading-4 opacity-75"> <Moment fromNow>{notification.createdDate}</Moment></span>
