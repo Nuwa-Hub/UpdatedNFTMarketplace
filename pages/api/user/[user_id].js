@@ -1,6 +1,6 @@
 import User from "models/User";
 import connectDB from "utils/connectDB";
-
+const mongoose = require("mongoose");
 export default async function handler(req, res) {
 	const { user_id } = req.query;
 
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	if (req.method === "PUT") {
 		try {
 			const updateUser = await User.findByIdAndUpdate(
-				user_id,
+				new mongoose.Types.ObjectId(user_id),
 				{ $set: req.body },
 				{ new: true }
 			);

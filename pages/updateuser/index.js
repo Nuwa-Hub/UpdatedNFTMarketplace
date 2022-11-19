@@ -31,7 +31,11 @@ export default function UpdateUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    updateCurrentUser(dispatch,inputs,currentUser._id)
+    // updateCurrentUser(dispatch,inputs,currentUser._id)
+    // console.log(currentUser._id);
+    if(currentUser._id){
+    dispatch(updateCurrentUser({user:inputs, id:currentUser._id}));
+    }
   };
   return (
     <>

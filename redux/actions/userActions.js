@@ -34,15 +34,44 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+export const updateCurrentUser = createAsyncThunk(
+  "user/updateUser",
+  async ({ user,id }, { rejectWithValue }) => {
+    try {
+      // configure header's Content-Type as JSON
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      console.log("user",user);
+      const res = await publicRequest.put(`/user/${id}`, user, config);
+      return res.data;
+    } catch (error) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 
 //update developer
-export const updateCurrentUser = async (dispatch, user, id) => {
-  try {
-    const res = await publicRequest.put(`/user/${id}`, user);
-    //console.log(res.data);
-   // dispatch(updateUserSucces(res.data));
-  } catch (err) {}
-};
+// export const updateCurrentUser = async (dispatch, user, id) => {
+//   try {
+//     const res = await publicRequest.put(`/user/${id}`, user);
+//     //console.log(res.data);
+//    // dispatch(updateUserSucces(res.data));
+//   } catch (err) {
+//     if (error.response && error.response.data.message) {
+//       return rejectWithValue(error.response.data.message);
+//     } else {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// };
 // export const registerUser = createAsyncThunk(
 //   'user/register',
 //   async ({ firstName, email, password }, { rejectWithValue }) => {

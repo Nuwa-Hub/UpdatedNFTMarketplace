@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         try {
             const newListing = new Listing(req.body);
             const listing = await newListing.save();
-            await NFT.findByIdAndUpdate(req.body.nft, { isListed: true, price: req.body.price })
+            await NFT.findByIdAndUpdate(req.body.nft, { isListed: true, price: req.body.price, listType: "fixed" })
             res.status(201).json(listing);
         } catch (err) {
             res.status(500).json(err);

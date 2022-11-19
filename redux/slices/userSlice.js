@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserDetails, userLogin } from "redux/actions/userActions";
+import { getUserDetails, userLogin,updateCurrentUser } from "redux/actions/userActions";
 
 // let userToken = null
 // if (typeof window !== "undefined") {
@@ -29,8 +29,11 @@ const userSlice = createSlice({
         },
         [getUserDetails.fulfilled]: (state, action) => {
             state.currentUser = action.payload.user;
+        },
+        [updateCurrentUser.fulfilled]: (state, action) => {
+            state.currentUser = action.payload;
         }
-  
+        
     }
 });
 

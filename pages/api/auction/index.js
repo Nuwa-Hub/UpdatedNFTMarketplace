@@ -24,7 +24,8 @@ export default async function handler(req, res) {
 			console.log(req.body);
 			const newAuction = new Auction(req.body);
 			const auction = await newAuction.save();
-			await NFT.findByIdAndUpdate(req.body.nft, { isListed: true,price:auction.startingPrice })
+			const listType = auction.nft.listType;
+			await NFT.findByIdAndUpdate(req.body.nft, { isListed: true, price:auction.startingPrice, listType:auction.auctionType })
 			res.status(201).json(auction);
 		} catch (err) {
 			res.status(500).json(err);

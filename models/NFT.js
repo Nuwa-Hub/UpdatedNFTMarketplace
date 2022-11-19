@@ -15,7 +15,7 @@ const NFTSchema = new mongoose.Schema(
 		listing: { type: String, default: "" },
 		pinataurl: { type: String, default: "" },
 		visits: { type: Number, default: 0 },
-        listType:{ type: String, enum: ['raffle', 'fixed','dec','high']},
+        listType:{ type: String, enum: ['raffle', 'fixed','Highest','Decreasing']},
 		listId:{ type: String, default: ""},
 		fixedValue:{ type: String, default: ""},
 	},
