@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     if (method === "GET") {
         try {
             const nft_id = req.query.nft_id;
-            const listing = await Listing.findOne({ nft: nft_id });
+            const listing = await Listing.findOne({ nft: nft_id,isCompleted:false });
             res.status(200).json(listing);
         } catch (err) {
             res.status(500).json(err);

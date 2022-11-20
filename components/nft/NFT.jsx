@@ -79,15 +79,16 @@ const Nft = () => {
   //get list details
   async function getListingDetails() {
     // console.log(`/auction/nft/${nft_id}`);
-    let listing = (await publicRequest.get(`listing/${nft_id}`)).data;
-    if (!listing) {
-      listing = (await publicRequest.get(`auction/nft/${nft_id}`)).data;
-      //console.log(listing);
-      listing = { ...listing[0], type: "auction" };
+    let listing;
+    if (nft.listType == 'fixed') {
+      listing = (await publicRequest.get(`listing/${nft_id}`)).data;
+    } else if (nft.listType == 'raffle') {
+      listing = 'raffle';
     } else {
-      listing = { ...listing[0], type: "listing" };
+      listing = (await publicRequest.get(`auction/nft/${nft_id}`)).data;
     }
     setList(listing);
+    console.log("listingasda", listing);
   }
   if (nft.isListed && !list) {
     getListingDetails();
@@ -306,6 +307,195 @@ const Nft = () => {
       deleteFavourite(distpatch, user._id, nft_id);
     }
   };
+  let nftDetails = null;
+  let nftButton = null;
+  if (nft.isListed == true && list) {
+    if (nft.listType == 'fixed') {
+      nftDetails = (<div className="mx-2 mt-5 ">
+        <p className="text-xl font-mono tracking-tight text-zinc-400 dark:text-white">
+          NFT Price : {nft.price} ETH
+        </p>
+      </div>)
+      nftButton = (
+        <button
+          type="button"
+          onClick={() => {
+            setBuy(true);
+          }}
+
+          className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
+        >
+          {buy && (
+            <div>
+              <BuyNowModal
+                executebuyNFT={executebuyNFT}
+                setBuy={setBuy}
+                buy={buy}
+                currentprice={nft.price}
+              />
+            </div>
+          )}
+          <div className="flex items-center justify-between flex-1">
+            <span className="text-lg font-medium text-white">
+              Buy Now
+            </span>
+          </div>
+        </button>
+      )
+    } else if (nft.listType == 'Decreasing') {
+      nftDetails = (<table className="table-auto flex">
+        <thead>
+          <tr className="flex flex-col">
+            <th className="px-4 py-2">Auction Type</th>
+            <th className="px-4 py-2">Start Price</th>
+            <th className="px-4 py-2">End Price</th>
+            <th className="px-4 py-2">Start Date</th>
+            <th className="px-4 py-2">End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="flex flex-col">
+            <td className="border px-4 py-2">
+              {list.auctionType}
+            </td>
+            <td className="border px-4 py-2">
+              {list.startingPrice}
+            </td>
+            <td className="border px-4 py-2">
+              {list.endingPrice}
+            </td>
+            <td className="border px-4 py-2">
+              {new Date(list.startDate).toLocaleDateString()}
+            </td>
+            <td className="border px-4 py-2">
+              {new Date(list.endDate).toLocaleDateString()}
+            </td>
+          </tr>
+        </tbody>
+      </table>)
+      nftButton = (
+        //TODO dec bidding should call buyfunction with current price
+        <button
+          type="button"
+          onClick={() => {
+            setBuy(true);
+          }}
+          className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
+        >
+          {buy && (
+            <div>
+              <DecreasingPriceBidModel
+                executebuyNFT={executebuyNFT}
+                setBuy={setBuy}
+                buy={buy}
+                currentprice={getCurrentPriceForDecreasingAuction()}
+              />
+            </div>
+          )}
+          <div className="flex items-center justify-between flex-1">
+            <span className="text-lg font-medium text-white">
+              Buy Now
+            </span>
+          </div>
+        </button>
+      )
+    } else if (nft.listType == 'Highest') {
+      nftDetails = (<table className="table-auto flex">
+        <thead>
+          <tr className="flex flex-col">
+            <th className="px-4 py-2">Auction Type</th>
+            <th className="px-4 py-2">Start Price</th>
+            {list.winningBid ? (
+              <th className="px-4 py-2">Current max Bid</th>
+            ) : null}
+            <th className="px-4 py-2">Start Date</th>
+            <th className="px-4 py-2">End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="flex flex-col">
+            <td className="border px-4 py-2">
+              {list.auctionType}
+            </td>
+            <td className="border px-4 py-2">
+              {list.startingPrice}
+            </td>
+            {list.winningBid ? (
+              <td className="border px-4 py-2">
+                {list.winningBid.value}
+              </td>
+            ) : null}
+            <td className="border px-4 py-2">
+              {new Date(list.startDate).toLocaleDateString()}
+            </td>
+            <td className="border px-4 py-2">
+              {new Date(list.endDate).toLocaleDateString()}
+            </td>
+          </tr>
+        </tbody>
+      </table>)
+      if (list.status == 'Bidding') {
+        nftButton = (
+          <>
+            <button
+              type="button"
+              onClick={executeBidNFT}
+              className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
+            >
+              <div className="flex items-center justify-between flex-1">
+                <span className="text-lg font-medium text-white">
+                  Bid Now
+                </span>
+              </div>
+            </button>
+            {bid && (
+              <div>
+                <HighestBidModal
+                  closeBidNFT={setBid}
+                  auction={list}
+                />
+              </div>
+            )}
+          </>
+        )
+      } else if (list.status == 'Pending' && list.winningBid.bidder == user.walletAdress) {
+        nftButton = (
+          <>
+            <button
+              type="button"
+              className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
+            >
+              Buy Win NFT
+            </button>
+          </>
+        )
+      } else {
+        nftButton = (
+          <p>Auction Ended</p>
+        )
+      }
+    } else if (nft.listType == 'raffle') {
+      nftDetails = (<p className="text-xl font-mono tracking-tight text-zinc-400 dark:text-white">Its on Raffles Try your Luck to Win It</p>)
+      nftButton = (<Link href={`/raffleNfts`}>
+        <button className="px-4 py-2 font-semibold text-white bg-zinc-400 rounded-lg shadow-md hover:bg-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-opacity-75">
+          Go to Raffle
+        </button>
+      </Link>)
+    }
+    if (nft.owner == user?.walletAdress) {
+      nftButton = null
+    }
+  } else {
+    if (nft.owner == user?.walletAdress) {
+      if (nft.isListed == false) {
+        nftButton = (<Link href={`/nft/${nft._id}/list`}>
+          <button className="px-4 py-2 font-semibold text-white bg-zinc-400 rounded-lg shadow-md hover:bg-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-opacity-75">
+            List NFT
+          </button>
+        </Link>)
+      }
+    }
+  }
 
   return (
     <div>
@@ -329,7 +519,7 @@ const Nft = () => {
             <div className="mb-2 mx-2">
               <p className=" text-2xl font-bold font-mono tracking-tight text-gray-900 dark:text-white">
                 {/* Collection Name */}
-                Cryptopuppies
+                {nft.collectionId.collectionName}
               </p>
             </div>
 
@@ -357,211 +547,21 @@ const Nft = () => {
               </div>
             </div>
             {/* If it is a bidding buy now should be bid now */}
-            <div className="mx-2 mt-5 ">
+            {/* <div className="mx-2 mt-5 ">
               <p className="text-xl font-mono tracking-tight text-zinc-400 dark:text-white">
-                {/* NFT Name */}
                 {nft.price}
               </p>
-            </div>
+            </div> */}
             <div className="flex flex-auto mx-2 mt-5 content-center ">
               <div className="basis-1/2 items-center m-1">
-                {nft.owner == user?.walletAdress ? (
-                  list ? (
-                    list.type == "auction" ? (
-                      //table for aution details TODO
-                      <table className="table-auto flex">
-                        <thead>
-                          <tr className="flex flex-col">
-                            <th className="px-4 py-2">Auction Type</th>
-                            <th className="px-4 py-2">Start Price</th>
-                            {list.auctionType == "Decreasing" ? (
-                              <th className="px-4 py-2">End Price</th>
-                            ) : null}
-                            {list.auctionType == "Highest" &&
-                              list.winningBid ? (
-                              <th className="px-4 py-2">Current max Bid</th>
-                            ) : null}
-                            <th className="px-4 py-2">Start Date</th>
-                            <th className="px-4 py-2">End Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="flex flex-col">
-                            <td className="border px-4 py-2">
-                              {list.auctionType}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {list.startingPrice}
-                            </td>
-                            {list.auctionType == "Decreasing" ? (
-                              <td className="border px-4 py-2">
-                                {list.endingPrice}
-                              </td>
-                            ) : null}
-                            {list.auctionType == "Highest" &&
-                              list.winningBid ? (
-                              <td className="border px-4 py-2">
-                                {list.winningBid.value}
-                              </td>
-                            ) : null}
-                            <td className="border px-4 py-2">
-                              {new Date(list.startDate).toLocaleDateString()}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {new Date(list.endDate).toLocaleDateString()}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    ) : (
-                      <p>li</p>
-                    ) //TODO direct sell details view
-                  ) : (
-                    <Link href={`/nft/${nft._id}/list`}>
-                      <button className="px-4 py-2 font-semibold text-white bg-zinc-400 rounded-lg shadow-md hover:bg-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-opacity-75">
-                        List NFT
-                      </button>
-                    </Link>
-                  )
-                ) : list ? (
-                  list.type == "auction" ? (
-                    <>
-                      <table className="table-auto flex">
-                        <thead>
-                          <tr className="flex flex-col">
-                            <th className="px-4 py-2">Auction Type</th>
-                            <th className="px-4 py-2">Start Price</th>
-                            {list.auctionType == "Decreasing" ? (
-                              <th className="px-4 py-2">End Price</th>
-                            ) : null}
-                            {list.auctionType == "Decreasing" ? (
-                              <th className="px-4 py-2">Current Price</th>
-                            ) : null}
-                            <th className="px-4 py-2">Start Date</th>
-                            <th className="px-4 py-2">End Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="flex flex-col">
-                            <td className="border px-4 py-2">
-                              {list.auctionType}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {list.startingPrice}
-                            </td>
-                            {list.auctionType == "Decreasing" ? (
-                              <td className="border px-4 py-2">
-                                {list.endingPrice}
-                              </td>
-                            ) : null}
-                            {list.auctionType == "Decreasing" ? (
-                              <td className="border px-4 py-2">
-                                {getCurrentPriceForDecreasingAuction()}
-                              </td>
-                            ) : null}
-                            <td className="border px-4 py-2">
-                              {new Date(list.startDate).toLocaleDateString()}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {new Date(list.endDate).toLocaleDateString()}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      {list.auctionType == "Decreasing" ? (
-                        //TODO dec bidding should call buyfunction with current price
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setBuy(true);
-                          }}
-                          className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
-                        >
-                          {buy && (
-                            <div>
-                              <DecreasingPriceBidModel
-                                executebuyNFT={executebuyNFT}
-                                setBuy={setBuy}
-                                buy={buy}
-                                currentprice={getCurrentPriceForDecreasingAuction()}
-                              />
-                            </div>
-                          )}
-                          <div className="flex items-center justify-between flex-1">
-                            <span className="text-lg font-medium text-white">
-                              Buy Now
-                            </span>
-                          </div>
-                        </button>
-                      ) : list.status == "Bidding" ? (
-                        <>
-                          <button
-                            type="button"
-                            onClick={executeBidNFT}
-                            className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
-                          >
-                            <div className="flex items-center justify-between flex-1">
-                              <span className="text-lg font-medium text-white">
-                                Bid Now
-                              </span>
-                            </div>
-                          </button>
-                          {bid && (
-                            <div>
-                              <HighestBidModal
-                                closeBidNFT={setBid}
-                                auction={list}
-                              />
-                            </div>
-                          )}
-                        </>
-                      ) : list.status == "Pending" &&
-                        list.winningBid.bidder == user.walletAdress ? (
-                        //TODO call buy function with winning bid
-                        <>
-                          <button
-                            type="button"
-                            className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
-                          >
-                            Buy Win NFT
-                          </button>
-                        </>
-                      ) : (
-                        <p>Auction Ended</p>
-                      )}
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setBuy(true);
-                      }}
-
-                      className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
-                    >
-                      {buy && (
-                        <div>
-                          <BuyNowModal
-                            executebuyNFT={executebuyNFT}
-                            setBuy={setBuy}
-                            buy={buy}
-                            currentprice={nft.price}
-                          />
-                        </div>
-                      )}
-                      <div className="flex items-center justify-between flex-1">
-                        <span className="text-lg font-medium text-white">
-                          Buy Now
-                        </span>
-                      </div>
-                    </button>
-                  )
-                ) : null}
+                {nftDetails}
+                <br />
+                {nftButton}
               </div>
             </div>
           </div>
         </div>
-        <Accordion_ />
+        <Accordion_ nft={nft._id} />
       </div>
     </div>
   );

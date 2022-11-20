@@ -193,10 +193,10 @@ export default function ActionTable({ color }) {
                         {auction.owner.substring(0, 8) + "..."}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {auction.startPrice}
+                        {auction.startingPrice}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {auction.endPrice}
+                        {auction.endingPrice}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         {new Date(auction.startDate).toLocaleDateString()}

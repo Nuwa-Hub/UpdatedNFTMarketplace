@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	//get method for rendering data
 	if (req.method === "GET") {
 		try {
-			const nft = await NFT.findById(req.query.nft_id);
+			const nft = await NFT.findById(req.query.nft_id).populate("collectionId");
 			await NFT.findByIdAndUpdate(req.query.nft_id, { visits: nft.visits + 1 });
 			res.status(200).json(nft);
 		} catch (err) {
