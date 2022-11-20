@@ -17,6 +17,8 @@ import {
   getAllFavouritesByUserId,
 } from "redux/actions/FavouriteAction";
 import DecreasingPriceBidModel from "./DecreasingPriceBidModel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Nft = () => {
   const [message, updateMessage] = useState("");
@@ -33,6 +35,20 @@ const Nft = () => {
   const favs = useSelector((state) => state.favourite.favourites);
 
   const distpatch = useDispatch();
+
+  //this is for notify messages
+  function notify(msg) {
+    toast(msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
 
   useEffect(() => {
     if (favs.includes(nft_id)) {
@@ -66,7 +82,7 @@ const Nft = () => {
     let listing = (await publicRequest.get(`listing/${nft_id}`)).data;
     if (!listing) {
       listing = (await publicRequest.get(`auction/nft/${nft_id}`)).data;
-      console.log(listing);
+      //console.log(listing);
       listing = { ...listing[0], type: "auction" };
     } else {
       listing = { ...listing[0], type: "listing" };
@@ -101,7 +117,7 @@ const Nft = () => {
       console.log("error uploading JSON metadata:", e);
     }
   }
-  console.log(list)
+  //console.log(list);
   function getCurrentPriceForDecreasingAuction() {
     const currentDate = new Date();
     const startDate = new Date(list.startDate);
@@ -113,7 +129,7 @@ const Nft = () => {
     );
     const startPrice = list.startingPrice;
     const endPrice = list.endingPrice;
-    console.log(startPrice)
+    console.log(startPrice);
     const price = (
       startPrice -
       (startPrice - endPrice) * (currentDurationHours / durationHours)
@@ -122,17 +138,18 @@ const Nft = () => {
     return price;
   }
 
+  async function mintNFT() {
 
-  async function listNFT() {
     //Upload data to IPFS
     try {
+      updateMessage("Please Wait...");
       const ethers = require("ethers");
 
       const metadataURL = await uploadMetadataToIPFS();
       //After adding your Hardhat network to your metamask, this code will get providers and signers
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      updateMessage("Please wait.. uploading (upto 5 mins)");
+      //updateMessage("Please wait.. uploading (upto 5 mins)");
 
       //Pull the deployed contract instance
       let contract = new ethers.Contract(
@@ -140,13 +157,13 @@ const Nft = () => {
         Marketplace.abi,
         signer
       );
-      let newwPrice = nft.price.toString()
-      if(nft.listType=="Decreasing"){
-        const curprice=getCurrentPriceForDecreasingAuction();
-         newwPrice = curprice.toString()
+      let newwPrice = nft.price.toString();
+      if (nft.listType == "Decreasing") {
+        const curprice = getCurrentPriceForDecreasingAuction();
+        newwPrice = curprice.toString();
       }
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits(newwPrice, "ether");
+      const price = ethers.utils.parseUnits("0.1", "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 
@@ -174,18 +191,30 @@ const Nft = () => {
         owner: user.walletAdress,
       };
       updateNFTByNFTId(distpatch, newnft, nft._id);
-
-      alert("Successfully minted your NFT!");
-
+      updateMessage("");
+      if (nft.listType == "Decreasing") {
+        // alert("Successfully minted your NFT!");
+        notify("Successfully Buy the NFT from Decreasing Auction!");
+        //alert("Collection Created");
+      } else {
+        notify("Successfully Buy the NFT!");
+      }
+      setTimeout(() => {
+        router.push({
+          pathname: "/nft/user",
+        });
+      }, "3000");
       //window.location.replace("/")
     } catch (e) {
       alert("Upload error" + e);
+      notify("something went wrong!");
     }
   }
 
   const hexToDecimal = (hex) => parseInt(hex, 16);
 
   async function buyNFT() {
+    updateMessage("Please Wait...");
     const tokenId = hexToDecimal(nft.tokenId);
     try {
       const ethers = require("ethers");
@@ -199,43 +228,58 @@ const Nft = () => {
         Marketplace.abi,
         signer
       );
-      
-      let newwPrice = nft.price.toString()
-      if(nft.listType=="Decreasing"){
-        const curprice=getCurrentPriceForDecreasingAuction();
-         newwPrice = curprice.toString()
+
+      let newwPrice = nft.price.toString();
+      if (nft.listType == "Decreasing") {
+        const curprice = getCurrentPriceForDecreasingAuction();
+        newwPrice = curprice.toString();
       }
+      console.log(newwPrice);
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits(newwPrice, "ether");
-      updateMessage("Buying the NFT... Please Wait (Upto 5 mins)");
+      const price = ethers.utils.parseUnits("0.06", "ether");
+     
       //run the executeSale function
       //let owner = await contract.withdraw()
       // console.log(owner)
-      let ns = await contract.getAllNFTs();
-      console.log(ns);
+      //let ns = await contract.getAllNFTs();
+      //console.log(ns);
       let transaction = await contract.executeSale(tokenId, {
-        value: salePrice,
+        value: price,
       });
       await transaction.wait();
 
       const newnft = { isListed: false, owner: user.walletAdress };
       updateNFTByNFTId(distpatch, newnft, nft._id);
-      alert("You successfully bought the NFT!");
+      //alert("You successfully bought the NFT!");
       updateMessage("");
+      if (nft.listType == "Decreasing") {
+        // alert("Successfully minted your NFT!");
+        notify("Successfully Buy the NFT from Decreasing Auction!");
+        //alert("Collection Created");
+      } else {
+        notify("Successfully Buy the NFT!");
+      }
+      setTimeout(() => {
+        router.push({
+          pathname: "/nft/user",
+        });
+      }, "3000");
     } catch (e) {
       alert("Upload Error" + e);
+      notify("something went wrong!");
     }
   }
 
   async function executebuyNFT(e) {
+
     e.preventDefault();
     //setBuy(true);
     if (nft.mint == true) {
-      console.log("buy");
+      //console.log("buy");
       await buyNFT();
     } else {
-      console.log("mint");
-      await listNFT();
+      //console.log("mint");
+      await mintNFT();
     }
   }
 
@@ -265,6 +309,7 @@ const Nft = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className="container px-2 py-2 mx-auto lg:pt-12 lg:px-2">
         <div className="grid grid-cols-1  md:grid-cols-3">
           <div className="items-center">
@@ -319,7 +364,6 @@ const Nft = () => {
               </p>
             </div>
             <div className="flex flex-auto mx-2 mt-5 content-center ">
-
               <div className="basis-1/2 items-center m-1">
                 {nft.owner == user?.walletAdress ? (
                   list ? (
@@ -334,7 +378,7 @@ const Nft = () => {
                               <th className="px-4 py-2">End Price</th>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                              list.winningBid ? (
+                            list.winningBid ? (
                               <th className="px-4 py-2">Current max Bid</th>
                             ) : null}
                             <th className="px-4 py-2">Start Date</th>
@@ -355,7 +399,7 @@ const Nft = () => {
                               </td>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                              list.winningBid ? (
+                            list.winningBid ? (
                               <td className="border px-4 py-2">
                                 {list.winningBid.value}
                               </td>
@@ -485,12 +529,20 @@ const Nft = () => {
                   ) : (
                     <button
                       type="button"
-                      onClick={executebuyNFT}
+                      onClick={() => {
+                            setBuy(true);
+                          }}
+                     
                       className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
                     >
                       {buy && (
                         <div>
-                          <BuyNowModal />
+                          <BuyNowModal 
+                            executebuyNFT={executebuyNFT}
+                                setBuy={setBuy}
+                                buy={buy}
+                                currentprice={nft.price}
+                          />
                         </div>
                       )}
                       <div className="flex items-center justify-between flex-1">

@@ -1,6 +1,6 @@
 import { RiWallet3Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
-const BuyNowModal = ({ executebuyNFT, setBuy, buy }) => {
+const BuyNowModal = ({ executebuyNFT, setBuy, buy, currentprice }) => {
   const [temp, settemp] = useState(true);
   useEffect(() => {
     if (!temp) {
@@ -33,7 +33,9 @@ const BuyNowModal = ({ executebuyNFT, setBuy, buy }) => {
                       Buy Now
                     </h3>
                     <div className="flex py-2">Sale Ends in: 1d 2h 3m 4s</div>
-                    <div className="flex py-2">Current price : 2.325 ETH</div>
+                    <div className="flex py-2">
+                      Current price : {currentprice} ETH
+                    </div>
                     <div className="mt-2">
                       <input
                         className="shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -48,7 +50,13 @@ const BuyNowModal = ({ executebuyNFT, setBuy, buy }) => {
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
-                  onClick={executebuyNFT}
+                  onClick={(e) => {
+                    setTimeout(() => {
+                      settemp(false);
+                    }, "2000");
+
+                    executebuyNFT(e);
+                  }}
                   className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Buy Now
