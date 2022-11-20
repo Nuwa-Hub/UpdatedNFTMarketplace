@@ -128,7 +128,7 @@ const Navbar = () => {
 							<div>
 								<div className="text-black w-full p-4">
 									<Link
-										href={`/collection/create`}
+										href={`/collection`}
 										smooth={true}
 										duration={500}
 									>
@@ -138,7 +138,7 @@ const Navbar = () => {
 								<div className="text-black w-full p-4">
 									{" "}
 									<Link
-										href={`/nft/create`}
+										href={`/nft`}
 										smooth={true}
 										duration={500}
 									>
@@ -147,7 +147,7 @@ const Navbar = () => {
 								</div>
 								<div className="text-black w-full p-4">
 									<Link
-										href={`/collection/create`}
+										href={`/raffleNfts/`}
 										smooth={true}
 										duration={500}
 									>
