@@ -10,7 +10,6 @@
 		"test": "jest --watch",
 		"test:ci": "jest --ci",
 		"cypress:open": "cypress open"
-			
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.1",
@@ -37,6 +36,7 @@
 		"magic-sdk": "^9.1.0",
 		"mongoose": "^6.6.1",
 		"next": "12.2.3",
+		"next-pwa": "^5.6.0",
 		"next-redux-wrapper": "^8.0.0",
 		"path": "^0.12.7",
 		"react": "18.2.0",
