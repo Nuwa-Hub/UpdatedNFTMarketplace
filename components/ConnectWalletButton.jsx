@@ -20,9 +20,10 @@ const ConnectWalletButton = () => {
 			),
 		});
 	};
-
-	const connectWallet = async () => {
-		if (window.ethereum) {
+	async function handleEthereum() {
+		const { ethereum } = window;
+		if (ethereum) {
+			console.log('Ethereum successfully detected!');
 			const res = await window.ethereum.request({
 				method: "eth_requestAccounts",
 			});
@@ -47,7 +48,18 @@ const ConnectWalletButton = () => {
 			});
 			dispatch(userLogin({ walletAdress: address }));
 		} else {
+			console.log('Please install MetaMask!');
 			alert("install metamask extension!!");
+		}
+	}
+
+	const connectWallet = async () => {
+		if (window.ethereum) {
+			handleEthereum();
+		} else {
+			window.addEventListener('ethereum#initialized', handleEthereum, {
+				once: true,
+			});
 		}
 	};
 	const { currentUser, userToken } = useSelector((state) => state.user);
