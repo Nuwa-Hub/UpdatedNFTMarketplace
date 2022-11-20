@@ -42,9 +42,9 @@ const DecliningPriceSell = ({ nft }) => {
 
       // const newnft = { isListed: false, owner: user.walletAdress };
       // updateNFTByUserId(distpatch, newnft, nft._id);
-      alert("You successfully list the NFT!");
+  //    alert("You successfully list the NFT!");
     } catch (e) {
-      alert("Upload Error" + e);
+    //  alert("Upload Error" + e);
     }
   }
 
@@ -94,7 +94,7 @@ const DecliningPriceSell = ({ nft }) => {
           .catch((err) => {
             notify("Somthing Went Wrong!");
           });
-        console.log(values);
+   
       } else {
         values = {
           ...values,

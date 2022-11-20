@@ -4,24 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
 import { publicRequest } from "utils/requestMethods";
 
-const RaffleCard = ({ nft }) => {
+
+const RaffleCard = ({ nft,notify }) => {
   //console.log(user)
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
-
+  console.log(nft);
   //add bid
   const addRafbid = async () => {
     try {
       await bidforRaffle();
       const newbid = { raffleId: nft.listId, bidder: user?.walletAdress };
-      console.log("dfs");
+      //console.log("dfs");
       const res = await publicRequest.post(`/rafbid`, newbid);
 
-      console.log(res.data);
+      notify("Successfully Add a Bid!");
+      //alert("Collection Created");
+
+      //console.log(res.data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
+      notify("something went wrong!");
     }
   };
+
+   
 
   async function bidforRaffle() {
     try {
@@ -48,14 +55,15 @@ const RaffleCard = ({ nft }) => {
 
       // const newnft = { isListed: false, owner: user.walletAdress };
       // updateNFTByUserId(distpatch, newnft, nft._id);
-      alert("You successfully Bid for the NFT!");
+      //alert("You successfully Bid for the NFT!");
     } catch (e) {
-      alert("Upload Error" + e);
+      //alert("Upload Error" + e);
     }
   }
 
   return (
     <div className="nft">
+    
       <div className="main flex flex-col p-4 w-full">
         <img
           className="tokenImage rounded-lg h-64 max-w-full object-cover"
