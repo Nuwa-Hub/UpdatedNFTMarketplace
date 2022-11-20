@@ -237,7 +237,7 @@ const Nft = () => {
       console.log(newwPrice);
       //massage the params to be sent to the create NFT request
       const price = ethers.utils.parseUnits("0.06", "ether");
-     
+
       //run the executeSale function
       //let owner = await contract.withdraw()
       // console.log(owner)
@@ -378,7 +378,7 @@ const Nft = () => {
                               <th className="px-4 py-2">End Price</th>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                            list.winningBid ? (
+                              list.winningBid ? (
                               <th className="px-4 py-2">Current max Bid</th>
                             ) : null}
                             <th className="px-4 py-2">Start Date</th>
@@ -399,15 +399,17 @@ const Nft = () => {
                               </td>
                             ) : null}
                             {list.auctionType == "Highest" &&
-                            list.winningBid ? (
+                              list.winningBid ? (
                               <td className="border px-4 py-2">
                                 {list.winningBid.value}
                               </td>
                             ) : null}
                             <td className="border px-4 py-2">
-                              {list.startDate}
+                              {new Date(list.startDate).toLocaleDateString()}
                             </td>
-                            <td className="border px-4 py-2">{list.endDate}</td>
+                            <td className="border px-4 py-2">
+                              {new Date(list.endDate).toLocaleDateString()}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -458,9 +460,11 @@ const Nft = () => {
                               </td>
                             ) : null}
                             <td className="border px-4 py-2">
-                              {list.startDate}
+                              {new Date(list.startDate).toLocaleDateString()}
                             </td>
-                            <td className="border px-4 py-2">{list.endDate}</td>
+                            <td className="border px-4 py-2">
+                              {new Date(list.endDate).toLocaleDateString()}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -530,18 +534,18 @@ const Nft = () => {
                     <button
                       type="button"
                       onClick={() => {
-                            setBuy(true);
-                          }}
-                     
+                        setBuy(true);
+                      }}
+
                       className="break-inside bg-green-600 rounded-full px-8 py-4 mb-4 w-full hover:bg-green-700 transition ease-in-out duration-150"
                     >
                       {buy && (
                         <div>
-                          <BuyNowModal 
+                          <BuyNowModal
                             executebuyNFT={executebuyNFT}
-                                setBuy={setBuy}
-                                buy={buy}
-                                currentprice={nft.price}
+                            setBuy={setBuy}
+                            buy={buy}
+                            currentprice={nft.price}
                           />
                         </div>
                       )}
