@@ -68,6 +68,7 @@ const HighestBidModal = ({ closeBidNFT, auction }) => {
                       >
                         Bid Now
                       </h3>
+
                       <div className="flex py-2">
                         Floor price : {auction.startingPrice} ETH
                       </div>
@@ -116,6 +117,16 @@ const HighestBidModal = ({ closeBidNFT, auction }) => {
                   </button>
                 </div>
               </form>
+              {/* warning for 'please don't bid if you not have enough ETH to pay you will be get blocked */}
+
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                <strong className="font-bold">Warning!!! </strong>
+                <span className="block sm:inline">
+                  Please don't bid if you not have enough ETH to pay you will be
+                  get blocked
+                </span>
+              </div>
+
             </div>
           </div>
         </div>

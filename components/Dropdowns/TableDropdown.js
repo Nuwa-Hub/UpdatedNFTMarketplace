@@ -35,7 +35,7 @@ const NotificationDropdown = ({actions,id}) => {
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        {actions.map((action) => {
+        {actions?.map((action) => {
           return (
             <a key={action.name}
               className={
