@@ -5,9 +5,9 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{/* <link rel="manifest" href="/manifest.json" />
+					<link rel="manifest" href="/manifest.json" />
 					<link rel="apple-touch-icon" href="/icon.png"></link>
-					<meta name="theme-color" content="#fff" /> */}
+					<meta name="theme-color" content="#fff" />
 					{/* <link rel="stylesheet" type="text/css" href="swiper/swiper.min.css" />
 					<link rel="stylesheet" type="text/css" href="swiper/components/effect-coverflow/effect-coverflow.min.css" />
 					<link rel="stylesheet" type="text/css" href="swiper/components/pagination/pagination.min.css" />
