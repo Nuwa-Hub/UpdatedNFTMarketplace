@@ -1,15 +1,18 @@
 import Link from "next/link";
 
 const features = [
-  { name: "Origin", description: "Designed by Good Goods, Inc." },
+  { name: "Concept", description: "Designed by Good Goods, Kryptonaut Team." },
   {
-    name: "Material",
+    name: "Access",
     description:
-      "Solid walnut base with rare earth magnets and powder coated steel card cover",
+      "Any user that has registed for the Kryptonaut NFT Marketplace can participate in the raffle.",
   },
-  { name: "Dimensions", description: '6.25" x 3.55" x 1.15"' },
-  { name: "Finish", description: "Hand sanded and finished with natural oil" },
-  { name: "Includes", description: "Wood card tray and 3 refill packs" },
+  { name: "Limitations", description: "Can't get the bidding money back" },
+  { name: "Finish", description: "Affter the Raffle Duration ended" },
+  {
+    name: "Choose winner",
+    description: "Choose ranrom winner by the algorithm that we design",
+  },
   {
     name: "Considerations",
     description:
@@ -34,13 +37,14 @@ export default function RaffleHelper() {
             </button>
           </Link>{" "}
           <p className="mt-4 text-gray-500">
-            The walnut wood card tray is precision milled to perfectly fit a
-            stack of Focus cards. The powder coated steel divider separates
-            active cards from new ones, or can be used to archive important task
-            lists.
+            A raffle is a competition in which people obtain numbered bids. At a
+            set time, the winners are drawn at random from a container holding a
+            copy of each number. The drawn tickets are checked against a
+            collection of prizes with numbers attached to them, and the holder
+            of the ticket wins the nfts.
           </p>
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-            {features.map((feature,index) => (
+            {features.map((feature, index) => (
               <div key={index} className="border-t border-gray-200 pt-4">
                 <dt className="font-medium text-gray-900">{feature.name}</dt>
                 <dd className="mt-2 text-sm text-gray-500">

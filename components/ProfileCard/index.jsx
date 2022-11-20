@@ -1,7 +1,23 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { publicRequest } from "utils/requestMethods";
 
 const index = () => {
+  const user = useSelector((state) => state.user.currentUser);
+
+  const [listing, setListing] = React.useState([]);
+console.log(user)
+  useEffect(() => {
+    if (user) {
+      publicRequest.get(`listing/user/${user.walletAdress}`).then((res) => {
+        setListing(res.data);
+      });
+    }
+    // publicRequest.get(`nft/mostvisited`).then((res) => {
+    //   setnfts(res.data);
+    // });
+  }, [user]);
   return (
     <div className="">
       <div className="container mx-auto my-5 p-5">
@@ -11,23 +27,21 @@ const index = () => {
             {/* <!-- Profile Card --> */}
             <div className="bg-white p-3 border-t-4 border-green-400">
               <div className="image overflow-hidden">
-                <img className="h-auto w-full mx-auto" src="/dp.jpeg" alt="" />
+                <img className="h-auto w-full mx-auto" src={user?.img || `https://firebasestorage.googleapis.com/v0/b/nft-marketplace-8fa87.appspot.com/o/no.jpeg?alt=media&token=fbda54a5-085f-40fa-a2e9-0f67d98bae62`} alt="" />
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
-                Shilpa Maniyan
+                {user?.username || "unnamed"}
               </h1>
               <h3 className="text-gray-600 font-lg text-semibold leading-6">
-                Owner at Her Company Inc.
+                {}
               </h3>
               <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur
-                non deserunt
+              {user?.about || "none"}
               </p>
               <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li className="flex items-center py-3">
                   <span>Member since</span>
-                  <span className="ml-auto">Nov 07, 2016</span>
+                  <span className="ml-auto">Nov 07, 2022</span>
                 </li>
               </ul>
             </div>
@@ -150,17 +164,28 @@ const index = () => {
                     <div className="px-4 py-2">+11 998001001</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Current Address</div>
-                    <div className="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                    <div className="px-4 py-2 font-semibold">
+                      Current Address
+                    </div>
+                    <div className="px-4 py-2">
+                      Beech Creek, PA, Pennsylvania
+                    </div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Permanant Address</div>
-                    <div className="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                    <div className="px-4 py-2 font-semibold">
+                      Permanant Address
+                    </div>
+                    <div className="px-4 py-2">
+                      Arlington Heights, IL, Illinois
+                    </div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Email.</div>
                     <div className="px-4 py-2">
-                      <a className="text-blue-800" href="mailto:jane@example.com">
+                      <a
+                        className="text-blue-800"
+                        href="mailto:jane@example.com"
+                      >
                         jane@example.com
                       </a>
                     </div>
@@ -205,38 +230,17 @@ const index = () => {
                     <span className="tracking-wide">Listing History</span>
                   </div>
                   <ul className="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
+                  {listing.map((list) => (
                     <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">
+                       NFT ID : {list.nft.slice(0,20)}...
+                      </div>
+                      <div className="text-gray-500 text-xs">
+                        Date : {list.createdAt.slice(0,10)}
+                      </div>
                     </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
+                  ))}
+          
                   </ul>
                 </div>
                 <div>
@@ -266,12 +270,20 @@ const index = () => {
                   </div>
                   <ul className="list-inside space-y-2 overflow-y-scroll max-h-56 scrollbar-hide">
                     <li>
-                      <div className="text-teal-600">Masters Degree in Oxford</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">
+                      NFT ID : 63742f8408c32584ce7b...
+                      </div>
+                      <div className="text-gray-500 text-xs">
+                      Date : 2022-11-16
+                      </div>
                     </li>
                     <li>
-                      <div className="text-teal-600">Bachelors Degreen in LPU</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">
+                      NFT ID : 63742f8408c32584ce7b...
+                      </div>
+                      <div className="text-gray-500 text-xs">
+                      Date : 2022-11-16
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -283,7 +295,7 @@ const index = () => {
             <div className="my-4"></div>
             {/* <!-- Experience and education --> */}
             <div className="bg-white p-3 shadow-sm rounded-sm">
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2">
                 <div className="bg-white p-3 hover:shadow">
                   <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
                     <span className="text-green-500">

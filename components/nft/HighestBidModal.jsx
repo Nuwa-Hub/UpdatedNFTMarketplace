@@ -68,6 +68,7 @@ const HighestBidModal = ({ closeBidNFT, auction }) => {
                       >
                         Bid Now
                       </h3>
+                     
                       <div className="flex py-2">
                         Floor price : {auction.startingPrice} ETH
                       </div>

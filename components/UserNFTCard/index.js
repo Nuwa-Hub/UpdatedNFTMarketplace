@@ -3,9 +3,12 @@ import Link from "next/link";
 
 const UserNFTCard = ({ nft, user }) => {
   //console.log(user)
-  const trailLink = "";
-  if (user) {
+  let trailLink = "";
+  if (!nft.isListed) {
     trailLink = "list";
+  }
+  else{
+    trailLink = "user/listed";
   }
   return (
     <Link href={`/nft/${nft._id}/${trailLink}`}>
@@ -46,7 +49,7 @@ const UserNFTCard = ({ nft, user }) => {
                   color: "white",
                   fontWeight: "800",
                 }}
-                disabled={true}
+                
               >
                 Listed
               </button>
