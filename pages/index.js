@@ -49,7 +49,6 @@ export default function Home() {
       <GifCollection />
        {/* <NFTVedio/>   */}
       <RaffleHelper />
-
       {/* <MarketVedio/>  */}
       <ProductLists />
       <Trending />
