@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <div className="relative overflow-hidden bg-white">
@@ -9,7 +11,7 @@ export default function Header() {
             </h1>
             <p className="mt-4 text-xl text-gray-500">
               This year, our new summer collection will shelter you from the
-              harsh elements of a world that doesn't care if you live or die.
+              harsh NFTs of a world that doesn't care if you live or die.
             </p>
           </div>
           <div>
@@ -79,13 +81,14 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-
-              <a
+              <Link href={`/collection`} smooth={true} duration={500}>
+              <button
                 href="#"
                 className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700"
               >
                 Shop Collection
-              </a>
+              </button>
+              </Link>
             </div>
           </div>
         </div>

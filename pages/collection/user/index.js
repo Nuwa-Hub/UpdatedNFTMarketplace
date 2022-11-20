@@ -46,7 +46,7 @@ const explorecollection = () => {
   return (
     <div className="overflow-hidden">
       <h1 className="m-5 font-mono tracking-tight text-bold dark:text-white text-left sm:text-4xl  md:text-4xl lg:text-6xl">
-        Explore Collections
+        My Collections
       </h1>
       <div className="overflow-hidden text-gray-700">
         <div className="px-1 py-1 mx-auto lg:pt-12 lg:px-2">
