@@ -202,7 +202,7 @@ export default function ActionTable({ color }) {
                         {new Date(auction.startDate).toLocaleDateString()}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {new Date(auction.end).toLocaleDateString()}
+                        {new Date(auction.endDate).toLocaleDateString()}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         {auction.status}

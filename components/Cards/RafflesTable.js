@@ -1,0 +1,140 @@
+import React from "react";
+import { useEffect, useState } from "react";
+import { publicRequest } from "utils/requestMethods";
+// components
+
+import TableDropdown from "components/Dropdowns/TableDropdown.js";
+import Link from "next/link";
+
+export default function RafflesTable({ color }) {
+  const [raffles, setRaffles] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const tableHeader = [
+    "Owner",
+    "NFT",
+    "Start Date",
+    "End Date",
+    "Price",
+    "Is Completed",
+    "Winner",
+  ];
+  function getNFTs() {
+    setLoading(true);
+    publicRequest
+      .get("admin/raffles")
+      .then((res) => {
+        setRaffles(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    getNFTs();
+  }, []);
+  function blockUnBlockHandler(nft) {
+    publicRequest
+      .put(`admin/nft/${nft._id}`, { access: !nft.access })
+      .then((res) => {
+        getNFTs();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  if (isLoading) return <p>Loading...</p>;
+  if (!raffles) return <p>No data</p>;
+  return (
+    <>
+      <div
+        className={
+          "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+          (color === "light" ? "bg-white" : "bg-slate-700 text-white")
+        }
+      >
+        <div className="rounded-t mb-0 px-4 py-3 border-0">
+          <div className="flex flex-wrap items-center">
+            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+              <h3
+                className={
+                  "font-semibold text-lg " +
+                  (color === "light" ? "text-slate-700" : "text-white")
+                }
+              >
+                NFTs
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div className="block w-full overflow-x-auto">
+          {/* Projects table */}
+          <table className="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr>
+                {tableHeader.map((header) => {
+                  return (
+                    <th
+                      key={header}
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-slate-50 text-slate-500 border-slate-100"
+                          : "bg-slate-600 text-slate-200 border-slate-500")
+                      }
+                    >
+                      {header}
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {raffles.map((raffle) => {
+                return (
+                  <tr key={raffle._id}>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> 
+                        <a>{raffle.owner}</a>
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      <Link href={`/nft/${raffle.nft?._id}`}>
+                        <a>{raffle.nft?.NFTName}</a>
+                      </Link>
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {new Date(raffle.startDate).toLocaleDateString()}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {new Date(raffle.endDate).toLocaleDateString()}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {raffle.fixedValue}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {raffle.isCompleted ? "Yes" : "No"}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      {raffle.winner ? raffle.winner : "No Winner"} 
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                      <button
+                        className="bg-slate-200 text-slate-500 active:bg-slate-600 font-bold uppercase text-xs px-4 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => blockUnBlockHandler(raffle)}
+                      >
+                        {raffle.access ? "Block" : "Unblock"}
+                      </button>
+                    </td>
+                    {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                    <TableDropdown actions={actions} id={nft._id}/>
+                  </td> */}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
+}
