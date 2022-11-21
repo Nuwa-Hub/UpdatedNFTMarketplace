@@ -11,19 +11,27 @@ const Accordion_ = () => {
   //get current NFT id
   const router = useRouter();
   const nft_id = router.query.id;
-  const [data, setdata] = useState([]);
-  let prices = [];
-  let dates = [];
+  const [data, setdata] = useState(false);
+  const [prices, setprices] = useState(false);
+  const [dates, setdates] = useState(false);
   useEffect(() => {
     if (nft_id) {
       publicRequest.get(`nft/price/${nft_id}`).then((res) => {
-        setdata(res.data);
-      
+        if (res.data.length > 1) {
+          setdata(res.data);
+          setprices(res.data[0].map((item) => item.toString()));
+          setdates(res.data[1].map((item) => item.toString()));
+        }
       });
     }
   }, [nft_id]);
-
-console.log(data);
+  useEffect(() => {
+    if (data?.length > 1) {
+    setprices(data[0].map((item) => item.toString()));
+    setdates(data[1].map((item) => item.toString()));
+    }
+  }, [data]);
+ 
   return (
     <div className="mt-10">
       <div className="bg-white w-full border border-blue-300 divide-y divide-gray-200">
@@ -31,12 +39,14 @@ console.log(data);
           <summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
             Price History
           </summary>
-          <PriceHistoryLineChart
-            dates={data[1]}
-            prices={data[0]}
-            //	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
-            //	prices={["0.1", "0.2", "0.1"]}
-          />
+          {data && (
+            <PriceHistoryLineChart
+              dates={dates}
+              prices={prices}
+              //	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
+              //	prices={["0.1", "0.2", "0.1"]}
+            />
+          )}
           {/* <PriceHistoryTable /> */}
         </details>
         <details>
