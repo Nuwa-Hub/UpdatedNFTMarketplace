@@ -22,14 +22,14 @@ export default async function handler(req, res) {
       
        
       for (let i = 0; i < list.length; i++) {
-        ress[0].push(list[i].price);
-        ress[1].push(list[i].createdAt);
+        ress[0].push(list[i].price.toString());
+        ress[1].push(list[i].createdAt.toString().slice(0, 10));
       }
 
       for (let i = 0; i < auction.length; i++) {
         
-            ress[0].push(auction[i].startingPrice);
-            ress[1].push(auction[i].createdAt);
+            ress[0].push(auction[i].startingPrice.toString());
+            ress[1].push(auction[i].createdAt.toString().slice(0, 10));
     
         console.log(auction[i]);
       }
