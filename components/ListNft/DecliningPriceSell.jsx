@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 //select options
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useState } from "react";
 
 const DecliningPriceSell = ({ nft }) => {
   const [loading, setloading] = useState(false);
