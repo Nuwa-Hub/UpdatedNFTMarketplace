@@ -3,32 +3,34 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
 import { publicRequest } from "utils/requestMethods";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-
-const RaffleCard = ({ nft,notify }) => {
+const RaffleCard = ({ nft, notify }) => {
+  const [loading, setloading] = useState(false);
   //console.log(user)
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   console.log(nft);
   //add bid
   const addRafbid = async () => {
+    setloading(true);
     try {
       await bidforRaffle();
       const newbid = { raffleId: nft.listId, bidder: user?.walletAdress };
       //console.log("dfs");
       const res = await publicRequest.post(`/rafbid`, newbid);
-
+      setloading(false);
       notify("Successfully Add a Bid!");
       //alert("Collection Created");
 
       //console.log(res.data);
     } catch (err) {
       //console.log(err);
+      setloading(false);
       notify("something went wrong!");
     }
   };
-
-   
 
   async function bidforRaffle() {
     try {
@@ -63,7 +65,6 @@ const RaffleCard = ({ nft,notify }) => {
 
   return (
     <div className="nft">
-    
       <div className="main flex flex-col p-4 w-full">
         <img
           className="tokenImage rounded-lg h-64 max-w-full object-cover"
@@ -105,6 +106,15 @@ const RaffleCard = ({ nft,notify }) => {
           >
             Click Here For Bid
           </button>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+            }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </div>
     </div>

@@ -10,8 +10,12 @@ import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CreateCollection = () => {
+  const [loading, setloading] = useState(false);
+
   const [bannerImg, setBannerImg] = useState("");
   const [profileImg, setProfileImg] = useState("");
 
@@ -49,6 +53,7 @@ const CreateCollection = () => {
 
     // upload banner img
     if (bannerImg) {
+      setloading(true);
       const imgRef1 = ref(storage, `BannerImg-${bannerImg.lastModifiedDate}`);
       uploadBytes(imgRef1, bannerImg)
         .then(() => {
@@ -76,6 +81,7 @@ const CreateCollection = () => {
                         };
                         console.log(newCollection);
                         addCollections(dispatch, newCollection, token);
+                        setloading(false);
                         notify("Collection Created Successfully!");
                         //alert("Collection Created");
 
@@ -86,22 +92,26 @@ const CreateCollection = () => {
                         }, "3000");
                       })
                       .catch((err) => {
+                        setloading(false);
                         notify("something went wrong!");
                         console.log(err);
                       });
                   })
                   .catch((err) => {
+                    setloading(false);
                     notify("something went wrong!");
                     console.log(err.message);
                   });
               }
             })
             .catch((err) => {
+              setloading(false);
               notify("something went wrong!");
               console.log(err);
             });
         })
         .catch((err) => {
+          setloading(false);
           notify("something went wrong!");
           console.log(err.message);
         });
@@ -360,6 +370,16 @@ const CreateCollection = () => {
                   >
                     Submit
                   </button>
+                  <Backdrop
+                    sx={{
+                      color: "#fff",
+                      zIndex: (theme) => theme.zIndex.drawer + 1,
+                    }}
+                    open={loading}
+                   
+                  >
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
                 </div>
               </div>
             </Form>

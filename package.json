@@ -13,9 +13,12 @@
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.1",
+		"@emotion/styled": "^11.10.5",
 		"@fortawesome/fontawesome-free": "5.15.3",
 		"@headlessui/react": "^1.7.4",
 		"@heroicons/react": "^1.0.6",
+		"@mui/material": "^5.10.14",
+		"@mui/styled-engine-sc": "^5.10.14",
 		"@pinata/sdk": "^1.1.26",
 		"@popperjs/core": "^2.9.1",
 		"@reduxjs/toolkit": "^1.8.6",
@@ -50,6 +53,7 @@
 		"react-toastify": "^9.1.1",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-persist": "^6.0.0",
+		"styled-components": "^5.3.6",
 		"url-loader": "^4.1.1",
 		"web3uikit": "^0.1.159",
 		"yup": "^0.32.11"

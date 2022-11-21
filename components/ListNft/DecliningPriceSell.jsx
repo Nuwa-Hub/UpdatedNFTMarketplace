@@ -7,9 +7,13 @@ import { useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+//select options
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const DecliningPriceSell = ({ nft }) => {
+  const [loading, setloading] = useState(false);
+
   const router = useRouter();
   const user = useSelector((state) => state.user);
 
@@ -42,25 +46,25 @@ const DecliningPriceSell = ({ nft }) => {
 
       // const newnft = { isListed: false, owner: user.walletAdress };
       // updateNFTByUserId(distpatch, newnft, nft._id);
-  //    alert("You successfully list the NFT!");
+      //    alert("You successfully list the NFT!");
     } catch (e) {
-    //  alert("Upload Error" + e);
+      //  alert("Upload Error" + e);
     }
   }
 
-    //this is for notify messages
-    function notify(msg) {
-      toast(msg, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+  //this is for notify messages
+  function notify(msg) {
+    toast(msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
   const formik = useFormik({
     initialValues: {
       startingPrice: "",
@@ -69,6 +73,7 @@ const DecliningPriceSell = ({ nft }) => {
       endDate: "",
     },
     onSubmit: async (values) => {
+      setloading(true);
       if (nft.mint == true) {
         console.log("list");
         await listingNFT();
@@ -82,6 +87,7 @@ const DecliningPriceSell = ({ nft }) => {
         publicRequest
           .post("auction", values)
           .then((res) => {
+            setloading(false);
             notify("NFT Listed Successfully!");
             //alert("Collection Created");
 
@@ -94,7 +100,6 @@ const DecliningPriceSell = ({ nft }) => {
           .catch((err) => {
             notify("Somthing Went Wrong!");
           });
-   
       } else {
         values = {
           ...values,
@@ -105,6 +110,7 @@ const DecliningPriceSell = ({ nft }) => {
         publicRequest
           .post("auction", values)
           .then((res) => {
+            setloading(false);
             notify("NFT Listed Successfully!");
             //alert("Collection Created");
 
@@ -119,7 +125,6 @@ const DecliningPriceSell = ({ nft }) => {
             console.log(err);
           });
         console.log(values);
-        
       }
     },
     validationSchema: Yup.object({
@@ -142,7 +147,7 @@ const DecliningPriceSell = ({ nft }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-    <ToastContainer />
+      <ToastContainer />
       <div className="text-xl mx-2 mt-5 font-mono tracking-tight text-bold dark:text-white">
         Starting Price
       </div>
@@ -266,6 +271,15 @@ const DecliningPriceSell = ({ nft }) => {
               </span>
             </div>
           </button>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+            }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </div>
     </form>

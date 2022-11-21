@@ -8,8 +8,13 @@ import { useSelector } from "react-redux";
 import Marketplace from "../../common/Marketplace.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//select options
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Raffle = ({ nft }) => {
+  const [loading, setloading] = useState(false);
+
   const router = useRouter();
   const user = useSelector((state) => state.user);
 
@@ -58,9 +63,9 @@ const Raffle = ({ nft }) => {
 
       // const newnft = { isListed: false, owner: user.walletAdress };
       // updateNFTByUserId(distpatch, newnft, nft._id);
-      alert("You successfully list the NFT!");
+     // alert("You successfully list the NFT!");
     } catch (e) {
-      alert("Upload Error" + e);
+     // alert("Upload Error" + e);
     }
   }
 
@@ -71,6 +76,7 @@ const Raffle = ({ nft }) => {
       endDate: "",
     },
     onSubmit: async (values) => {
+      setloading(true);
       if (nft.mint == true) {
         console.log("list");
         await listingNFT();
@@ -83,6 +89,7 @@ const Raffle = ({ nft }) => {
           .post("raffle", values)
           .then((res) => {
            // console.log(res);
+           setloading(false);
             notify("NFT Add To Raffle Successfully!");
             //alert("Collection Created");
 
@@ -93,6 +100,7 @@ const Raffle = ({ nft }) => {
             }, "3000");
           })
           .catch((err) => {
+            setloading(false);
             notify("Somthing Went Wrong!");
             //console.log(err);
           });
@@ -106,6 +114,7 @@ const Raffle = ({ nft }) => {
         publicRequest
           .post("raffle", values)
           .then((res) => {
+            setloading(false);
             //console.log(res);
             notify("NFT Add To Raffle Successfully!");
             //alert("Collection Created");
@@ -117,6 +126,7 @@ const Raffle = ({ nft }) => {
             }, "3000");
           })
           .catch((err) => {
+            setloading(false);
             notify("Somthing Went Wrong!");
            // console.log(err);
           });
@@ -224,6 +234,15 @@ const Raffle = ({ nft }) => {
               </span>
             </div>
           </button>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+            }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </div>
     </form>

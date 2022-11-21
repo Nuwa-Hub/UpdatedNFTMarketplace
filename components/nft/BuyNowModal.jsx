@@ -37,12 +37,7 @@ const BuyNowModal = ({ executebuyNFT, setBuy, buy, currentprice }) => {
                       Current price : {currentprice} ETH
                     </div>
                     <div className="mt-2">
-                      <input
-                        className="shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="bid price"
-                        type="text"
-                        placeholder="Price"
-                      />
+                    
                     </div>
                   </div>
                 </div>
