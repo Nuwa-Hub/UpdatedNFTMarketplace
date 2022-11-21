@@ -1,41 +1,20 @@
 import React from "react";
 import Chart from "chart.js";
 
-export default function CardLineChart() {
+export default function PriceHistoryLineChart(props) {
+	const { dates, prices } = props;
 	React.useEffect(() => {
 		var config = {
 			type: "line",
 			data: {
-				labels: [
-					"January",
-					"February",
-					"March",
-					"April",
-					"May",
-					"June",
-					"July",
-					"August",
-					"September",
-					"October",
-					"November",
-					"December",
-				],
+				labels: dates,
 				datasets: [
 					{
 						label: new Date().getFullYear(),
-						backgroundColor: "#4c51bf",
+						backgroundColor: "#F9F2F2",
 						borderColor: "#4c51bf",
-						data: [65, 78, 66, 44, 56, 67, 75, 40, 59, 80, 81, 56],
+						data: prices,
 						fill: false,
-					},
-					{
-						label: new Date().getFullYear() - 1,
-						fill: false,
-						backgroundColor: "#fff",
-						borderColor: "#fff",
-						data: [
-							40, 68, 86, 74, 56, 60, 87, 114, 136, 106, 30, 63,
-						],
 					},
 				],
 			},
@@ -115,17 +94,10 @@ export default function CardLineChart() {
 	}, []);
 	return (
 		<>
-			<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700">
+			<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700 ">
 				<div className="rounded-t mb-0 px-4 py-3 bg-transparent">
 					<div className="flex flex-wrap items-center">
-						<div className="relative w-full max-w-full flex-grow flex-1">
-							<h6 className="uppercase text-slate-100 mb-1 text-xs font-semibold">
-								Overview
-							</h6>
-							<h2 className="text-white text-xl font-semibold">
-								Sales value
-							</h2>
-						</div>
+						<div className="relative w-full max-w-full flex-grow flex-1"></div>
 					</div>
 				</div>
 				<div className="p-4 flex-auto">

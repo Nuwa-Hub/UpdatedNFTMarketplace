@@ -1,6 +1,8 @@
 // import Accordion from "react-bootstrap/Accordion";
+
 import ItemActivityTable from "./ItemActivityTable";
 import ListingTable from "./ListingTable";
+import PriceHistoryLineChart from "./PriceHistoryLineChart";
 import PriceHistoryTable from "./PriceHistoryTable";
 const Accordion_ = () => {
 	return (
@@ -10,7 +12,11 @@ const Accordion_ = () => {
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
 						Price History
 					</summary>
-					<PriceHistoryTable />
+					<PriceHistoryLineChart
+						dates={["2022/08/03", "2022/08/03", "2022/08/03"]}
+						prices={["0.1", "0.2", "0.3"]}
+					/>
+					{/* <PriceHistoryTable /> */}
 				</details>
 				<details>
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
