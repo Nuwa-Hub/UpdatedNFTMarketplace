@@ -1,12 +1,12 @@
 // import Accordion from "react-bootstrap/Accordion";
 
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { publicRequest } from "utils/requestMethods";
 import ItemActivityTable from "./ItemActivityTable";
 import ListingTable from "./ListingTable";
 import PriceHistoryLineChart from "./PriceHistoryLineChart";
 import PriceHistoryTable from "./PriceHistoryTable";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { publicRequest } from "utils/requestMethods";
 const Accordion_ = () => {
   //get current NFT id
   const router = useRouter();
@@ -63,7 +63,7 @@ const Accordion_ = () => {
         </details>
       </div>
 
-      {/* <Accordion defaultActiveKey="0">
+			{/* <Accordion defaultActiveKey="0">
 				<Accordion.Item eventKey="0">
 					<Accordion.Header>Price History</Accordion.Header>
 					<Accordion.Body>
@@ -83,8 +83,8 @@ const Accordion_ = () => {
 					</Accordion.Body>
 				</Accordion.Item>
 			</Accordion> */}
-    </div>
-  );
+		</div>
+	);
 };
 
 export default Accordion_;
