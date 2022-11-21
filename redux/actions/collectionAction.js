@@ -11,7 +11,7 @@ const BASE_URL = "http://localhost:3000/api/";
 //add collection
 export const addCollections = async (dispatch, newCollection,token) => {
   try {
-    console.log("ssdfsdfd")
+  
      const userRequest = axios.create({
       baseURL: BASE_URL,
       headers: { token: `${token}` },
