@@ -10,7 +10,6 @@ export default function PriceHistoryLineChart(props) {
 				labels: dates,
 				datasets: [
 					{
-						label: new Date().getFullYear(),
 						backgroundColor: "#F9F2F2",
 						borderColor: "#4c51bf",
 						data: prices,
