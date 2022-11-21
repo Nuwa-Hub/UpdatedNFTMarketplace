@@ -10,6 +10,7 @@ export default function PriceHistoryLineChart(props) {
 				labels: dates,
 				datasets: [
 					{
+						lable: "Price",
 						backgroundColor: "#ffffff",
 						borderColor: "#4c51bf",
 						data: prices,
@@ -53,13 +54,11 @@ export default function PriceHistoryLineChart(props) {
 								fontColor: "white",
 							},
 							gridLines: {
-								display: false,
-								borderDash: [2],
-								borderDashOffset: [2],
+								borderDash: [3],
+								borderDashOffset: [3],
+								drawBorder: false,
 								color: "#f2fffb",
 								zeroLineColor: "#000000",
-								zeroLineBorderDash: [2],
-								zeroLineBorderDashOffset: [2],
 							},
 						},
 					],
@@ -72,7 +71,7 @@ export default function PriceHistoryLineChart(props) {
 							scaleLabel: {
 								display: false,
 								labelString: "Value",
-								fontColor: "white",
+								fontColor: "black",
 							},
 							gridLines: {
 								borderDash: [3],
@@ -80,8 +79,8 @@ export default function PriceHistoryLineChart(props) {
 								drawBorder: false,
 								color: "#f2fffb",
 								zeroLineColor: "#000000",
-								zeroLineBorderDash: [2],
-								zeroLineBorderDashOffset: [2],
+								// zeroLineBorderDash: [2],
+								// zeroLineBorderDashOffset: [2],
 							},
 						},
 					],
