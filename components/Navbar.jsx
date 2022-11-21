@@ -125,35 +125,33 @@ const Navbar = () => {
 					<div className="relative group pr-12 pt-4 cursor-pointer">
 						Explore
 						<div className="absolute w-200 invisible group-hover:visible bg-gray-50 pt-4">
-							<div>
-								<div className="text-black w-full p-4">
-									<Link
-										href={`/collection`}
-										smooth={true}
-										duration={500}
-									>
-										<a>Explore Collections</a>
-									</Link>
-								</div>
-								<div className="text-black w-full p-4">
-									{" "}
-									<Link
-										href={`/nft`}
-										smooth={true}
-										duration={500}
-									>
-										<a>Explore NFT</a>
-									</Link>
-								</div>
-								<div className="text-black w-full p-4">
-									<Link
-										href={`/raffleNfts/`}
-										smooth={true}
-										duration={500}
-									>
-										<a>Explore Raffles</a>
-									</Link>
-								</div>
+							<div className="text-black w-full p-4">
+								<Link
+									href={`/collection`}
+									smooth={true}
+									duration={500}
+								>
+									<a>Explore Collections</a>
+								</Link>
+							</div>
+							<div className="text-black w-full p-4">
+								{" "}
+								<Link
+									href={`/nft`}
+									smooth={true}
+									duration={500}
+								>
+									<a>Explore NFT</a>
+								</Link>
+							</div>
+							<div className="text-black w-full p-4">
+								<Link
+									href={`/raffleNfts/`}
+									smooth={true}
+									duration={500}
+								>
+									<a>Explore Raffles</a>
+								</Link>
 							</div>
 						</div>
 					</div>
