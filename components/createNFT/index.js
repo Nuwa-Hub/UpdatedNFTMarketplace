@@ -15,8 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 //select options
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CreateNFT = () => {
+	const [loading, setloading] = useState(false);
   const [NFTImg, setNFTImg] = useState("");
   const [NFTImgUrl, setNFTImgUrl] = useState("");
   const [preImg, setPreImg] = useState("");
@@ -80,6 +83,7 @@ const CreateNFT = () => {
             console.log(newNFT);
             //call add nft fuction
             addNFTs(dispatch, newNFT);
+			setloading(false);
             notify("Create NFT successfully!");
 
             setTimeout(() => {
@@ -92,11 +96,13 @@ const CreateNFT = () => {
           })
           .catch((err) => {
             // console.log(err);
+			setloading(false);
             notify("something went wrong!");
           });
       })
       .catch((err) => {
         //console.log(err.message);
+		setloading(false);
         notify("something went wrong!");
       });
   }
@@ -118,6 +124,7 @@ const CreateNFT = () => {
   }
 
   const handleClick = async (e, { resetForm }) => {
+	setloading(true);
     const p = await uploadFileToFireStore(e);
 
     resetForm();
@@ -276,6 +283,16 @@ const CreateNFT = () => {
                   >
                     Submit
                   </button>
+				  <Backdrop
+                    sx={{
+                      color: "#fff",
+                      zIndex: (theme) => theme.zIndex.drawer + 1,
+                    }}
+                    open={loading}
+                   
+                  >
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
                 </div>
               </div>
             </Form>

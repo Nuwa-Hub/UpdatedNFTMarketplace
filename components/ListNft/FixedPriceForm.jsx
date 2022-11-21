@@ -8,9 +8,13 @@ import Marketplace from "../../common/Marketplace.json";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+//select options
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const FixedPriceForm = ({ nft }) => {
+  const [loading, setloading] = useState(false);
+
   const router = useRouter();
   const user = useSelector((state) => state.user);
   const [price, setPrice] = useState(0);
@@ -57,8 +61,8 @@ const FixedPriceForm = ({ nft }) => {
       alert("Upload Error" + e);
     }
   }
-   //this is for notify messages
-   function notify(msg) {
+  //this is for notify messages
+  function notify(msg) {
     toast(msg, {
       position: "top-right",
       autoClose: 3000,
@@ -74,6 +78,7 @@ const FixedPriceForm = ({ nft }) => {
   async function handleSubmited(e) {
     e.preventDefault();
     console.log(nft);
+    setloading(true);
     if (nft.mint == true) {
       console.log("list");
       await listingNFT();
@@ -87,16 +92,18 @@ const FixedPriceForm = ({ nft }) => {
       publicRequest
         .post("listing", values)
         .then((res) => {
+          setloading(false);
           notify("NFT Listed Successfully!");
-            //alert("Collection Created");
+          //alert("Collection Created");
 
-            setTimeout(() => {
-              router.push({
-                pathname: "/nft/user",
-              });
-            }, "3000");
+          setTimeout(() => {
+            router.push({
+              pathname: "/nft/user",
+            });
+          }, "3000");
         })
         .catch((err) => {
+          setloading(false);
           notify("Somthing Went Wrong!");
           //console.log(err);
         });
@@ -111,20 +118,22 @@ const FixedPriceForm = ({ nft }) => {
       publicRequest
         .post("listing", values)
         .then((res) => {
+          setloading(false);
           notify("NFT Listed Successfully!");
-            //alert("Collection Created");
+          //alert("Collection Created");
 
-            setTimeout(() => {
-              router.push({
-                pathname: "/nft/user",
-              });
-            }, "3000");
+          setTimeout(() => {
+            router.push({
+              pathname: "/nft/user",
+            });
+          }, "3000");
         })
         .catch((err) => {
+          setloading(false);
           notify("Somthing Went Wrong!");
           //console.log(err);
         });
-     // console.log(values);
+      // console.log(values);
     }
   }
   return (
@@ -178,6 +187,15 @@ const FixedPriceForm = ({ nft }) => {
               </span>
             </div>
           </button>
+          <Backdrop
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+            }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </div>
     </form>
