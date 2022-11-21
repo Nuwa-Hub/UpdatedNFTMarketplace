@@ -10,7 +10,7 @@ export default function PriceHistoryLineChart(props) {
 				labels: dates,
 				datasets: [
 					{
-						backgroundColor: "#F9F2F2",
+						backgroundColor: "#ffffff",
 						borderColor: "#4c51bf",
 						data: prices,
 						fill: false,
@@ -44,7 +44,7 @@ export default function PriceHistoryLineChart(props) {
 					xAxes: [
 						{
 							ticks: {
-								fontColor: "rgba(255,255,255,.7)",
+								fontColor: "#000000",
 							},
 							display: true,
 							scaleLabel: {
@@ -56,8 +56,8 @@ export default function PriceHistoryLineChart(props) {
 								display: false,
 								borderDash: [2],
 								borderDashOffset: [2],
-								color: "rgba(33, 37, 41, 0.3)",
-								zeroLineColor: "rgba(0, 0, 0, 0)",
+								color: "#f2fffb",
+								zeroLineColor: "#000000",
 								zeroLineBorderDash: [2],
 								zeroLineBorderDashOffset: [2],
 							},
@@ -66,7 +66,7 @@ export default function PriceHistoryLineChart(props) {
 					yAxes: [
 						{
 							ticks: {
-								fontColor: "rgba(255,255,255,.7)",
+								fontColor: "#000000",
 							},
 							display: true,
 							scaleLabel: {
@@ -78,8 +78,8 @@ export default function PriceHistoryLineChart(props) {
 								borderDash: [3],
 								borderDashOffset: [3],
 								drawBorder: false,
-								color: "rgba(255, 255, 255, 0.15)",
-								zeroLineColor: "rgba(33, 37, 41, 0)",
+								color: "#f2fffb",
+								zeroLineColor: "#000000",
 								zeroLineBorderDash: [2],
 								zeroLineBorderDashOffset: [2],
 							},
@@ -93,7 +93,7 @@ export default function PriceHistoryLineChart(props) {
 	}, []);
 	return (
 		<>
-			<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700 ">
+			<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-green-50 p-2">
 				<div className="rounded-t mb-0 px-4 py-3 bg-transparent">
 					<div className="flex flex-wrap items-center">
 						<div className="relative w-full max-w-full flex-grow flex-1"></div>

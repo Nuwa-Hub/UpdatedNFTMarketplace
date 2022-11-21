@@ -12,10 +12,13 @@ const Accordion_ = () => {
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
 						Price History
 					</summary>
-					<PriceHistoryLineChart
-						dates={["2022/08/03", "2022/08/03", "2022/08/03"]}
-						prices={["0.1", "0.2", "0.3"]}
-					/>
+					<div className="p-4">
+						<PriceHistoryLineChart
+							className="px-12 py-3"
+							dates={["2022/08/03", "2022/08/03", "2022/08/03"]}
+							prices={["0.1", "0.2", "0.3"]}
+						/>
+					</div>
 					{/* <PriceHistoryTable /> */}
 				</details>
 				<details>
