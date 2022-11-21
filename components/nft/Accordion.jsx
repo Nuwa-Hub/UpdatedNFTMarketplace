@@ -23,7 +23,7 @@ const Accordion_ = () => {
     }
   }, [nft_id]);
 
-
+console.log(data);
   return (
     <div className="mt-10">
       <div className="bg-white w-full border border-blue-300 divide-y divide-gray-200">
