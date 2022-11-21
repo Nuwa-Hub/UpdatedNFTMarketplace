@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-//import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Logo_dark from "../assets/logo-dark.svg";
 import Logo from "../assets/logo.svg";
 import ConnectWalletButton from "./ConnectWalletButton";
@@ -279,24 +279,71 @@ const Navbar = () => {
           </button> */}
 					{/* <ConnectButton  moralisAuth={true} /> */}
 				</div>
+
+				<div className="md:hidden mr-4" onClick={handleClick}>
+					{!nav ? (
+						<MenuIcon className="w-5" />
+					) : (
+						<XIcon className="w-5" />
+					)}
+				</div>
 			</div>
 
 			<ul
 				className={!nav ? "hidden" : "absolute bg-zinc-200 w-full px-8"}
 			>
-				<li className="border-b-2 border-zinc-300 w-full">
+				<li className="border-b-2 border-zinc-300 w-full p-2">
 					<Link href={`/collection`} smooth={true} duration={500}>
-						<a>Explore</a>
+						<a>Explore Collections</a>
 					</Link>
 				</li>
-				<li className="border-b-2 border-zinc-300 w-full">
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link href={`/nft`} smooth={true} duration={500}>
+						<a>Explore NFTs</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link href={`/raffleNfts/`} smooth={true} duration={500}>
+						<a>Explore Raffles</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link
+						href={`/collection/create`}
+						smooth={true}
+						duration={500}
+					>
+						<a>Create Collection</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
 					<Link href={`/nft/create`} smooth={true} duration={500}>
-						<a>Create</a>
+						<a>Create NFT</a>
 					</Link>
 				</li>
-				<li className="border-b-2 border-zinc-300 w-full">
-					<Link href={`/`} smooth={true} duration={500}>
-						<a>Stats</a>
+
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link
+						href={`/collection/user`}
+						smooth={true}
+						duration={500}
+					>
+						<a>My Collections</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link href={`/nft/user`} smooth={true} duration={500}>
+						<a>My NFTs</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2">
+					<Link href={`/favourite/`} smooth={true} duration={500}>
+						<a>My Favourites</a>
+					</Link>
+				</li>
+				<li className="border-b-2 border-zinc-300 w-full  p-2 text-red">
+					<Link href={`/complainform/`} smooth={true} duration={500}>
+						<a>Complaints</a>
 					</Link>
 				</li>
 
