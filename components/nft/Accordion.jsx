@@ -1,38 +1,59 @@
 // import Accordion from "react-bootstrap/Accordion";
 
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { publicRequest } from "utils/requestMethods";
 import ItemActivityTable from "./ItemActivityTable";
 import ListingTable from "./ListingTable";
 import PriceHistoryLineChart from "./PriceHistoryLineChart";
 import PriceHistoryTable from "./PriceHistoryTable";
 const Accordion_ = () => {
-	return (
-		<div className="mt-10">
-			<div className="bg-white w-full border border-blue-300 divide-y divide-gray-200">
-				<details>
-					<summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
-						Price History
-					</summary>
-					<PriceHistoryLineChart
-						dates={["2022/08/03", "2022/08/03", "2022/08/03"]}
-						prices={["0.1", "0.2", "0.3"]}
-					/>
-					{/* <PriceHistoryTable /> */}
-				</details>
-				<details>
-					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
-						Listings
-					</summary>
-					<ListingTable />
-				</details>
-				<details>
-					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
-						Item Activity
-					</summary>
-					<ItemActivityTable />
-				</details>
-			</div>
+  //get current NFT id
+  const router = useRouter();
+  const nft_id = router.query.id;
+  const [data, setdata] = useState([]);
+  let prices = [];
+  let dates = [];
+  useEffect(() => {
+    if (nft_id) {
+      publicRequest.get(`nft/price/${nft_id}`).then((res) => {
+        setdata(res.data);
+      
+      });
+    }
+  }, [nft_id]);
 
-			{/* <Accordion defaultActiveKey="0">
+
+  return (
+    <div className="mt-10">
+      <div className="bg-white w-full border border-blue-300 divide-y divide-gray-200">
+        <details>
+          <summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
+            Price History
+          </summary>
+          <PriceHistoryLineChart
+            dates={data[1]}
+            prices={data[0]}
+            //	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
+            //	prices={["0.1", "0.2", "0.1"]}
+          />
+          {/* <PriceHistoryTable /> */}
+        </details>
+        <details>
+          <summary className="question py-3 px-4 cursor-pointer select-none w-full">
+            Listings
+          </summary>
+          <ListingTable />
+        </details>
+        <details>
+          <summary className="question py-3 px-4 cursor-pointer select-none w-full">
+            Item Activity
+          </summary>
+          <ItemActivityTable />
+        </details>
+      </div>
+
+      {/* <Accordion defaultActiveKey="0">
 				<Accordion.Item eventKey="0">
 					<Accordion.Header>Price History</Accordion.Header>
 					<Accordion.Body>
@@ -52,8 +73,8 @@ const Accordion_ = () => {
 					</Accordion.Body>
 				</Accordion.Item>
 			</Accordion> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Accordion_;
