@@ -9,6 +9,7 @@ import { publicRequest } from "utils/requestMethods";
 import { useRouter } from "next/router";
 import NavbarHelper from "./SearchHelpers/NavbarHelper";
 import { CgProfile } from "react-icons/cg";
+import { getAllNotificationsByUserId } from "redux/actions/FavouriteAction";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -20,6 +21,7 @@ const Navbar = () => {
   const [adminButton, setAdminButton] = useState(null);
   const [term, setTerm] = useState("");
   const { currentUser, userToken } = useSelector((state) => state.user);
+  const notifies = useSelector((state) => state.favourite.notifications);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -45,6 +47,9 @@ const Navbar = () => {
       );
     } else {
       setAdminButton(null);
+    }
+    if (currentUser) {
+      getAllNotificationsByUserId(dispatch, currentUser?.walletAdress);
     }
   }, [userToken, dispatch]);
 
@@ -229,6 +234,9 @@ const Navbar = () => {
           {currentUser ? (
             <div className="relative group pr-12">
               <CgProfile size={50} />
+              <div className="absolute w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center top-1 left-10">
+                <h1 className="font-bold">{notifies && notifies.length}</h1>
+              </div>
               <div className="absolute w-200 invisible group-hover:visible bg-gray-50 pt-4">
                 <div>
                   <div className="text-black w-full p-4">
@@ -250,6 +258,12 @@ const Navbar = () => {
                     {" "}
                     <Link href={`/favourite/`} smooth={true} duration={500}>
                       <a>My Favourites</a>
+                    </Link>
+                  </div>
+                  <div className="text-black w-full p-4">
+                    {" "}
+                    <Link href={`/notification/`} smooth={true} duration={500}>
+                      <a>Notifcations</a>
                     </Link>
                   </div>
                   <div className="text-black w-full p-4">
