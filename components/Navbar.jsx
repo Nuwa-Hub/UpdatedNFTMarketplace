@@ -138,7 +138,7 @@ const Navbar = () => {
           )}
         </form>
         <div className="hidden md:flex pr-4">
-          {currentUser?.access ? (
+          
             <div className="relative group pr-12 pt-4 cursor-pointer">
               Explore
               <div className="absolute w-200 invisible group-hover:visible bg-gray-50 pt-4">
@@ -162,16 +162,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div
-              className="relative group pr-12 pt-4 cursor-pointer"
-              onClick={() => {
-                 getBalance();
-              }}
-            >
-              Explore
-            </div>
-          )}
+         
           {/* <div>
 						<Link href={`/collection`} smooth={true} duration={500}>
 							<a>Explore Collections</a>
