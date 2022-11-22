@@ -17,7 +17,7 @@ const Message = ({ notification }) => {
   const nft = notification.nft;
   const user = useSelector((state) => state.user.currentUser);
   const router = useRouter();
-  
+
   //this is for notify messages
   function notify(msg) {
     toast(msg, {
@@ -165,7 +165,7 @@ const Message = ({ notification }) => {
       <div className="bg-white  px-5 py-3.5 rounded-lg shadow hover:shadow-xl max-w-sm mx-auto transform hover:-translate-y-[0.125rem] transition duration-100 ease-linear">
         <div className="w-full flex items-center justify-between">
           <span className="font-large text-[25px] text-slate-400">
-            You Win!!!
+            You Win!!! {nft.type}
           </span>
           <button className="-mr-1 bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-600 h-5 w-5 rounded-full flex justify-center items-center">
             <svg
