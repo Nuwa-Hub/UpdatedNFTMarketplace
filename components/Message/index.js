@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 //select options
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { uploadFileToIPFS, uploadJSONToIPFS } from "../../common/pinata";
 
 const Message = ({ notification }) => {
   const [loading, setloading] = useState(false);
@@ -31,7 +32,24 @@ const Message = ({ notification }) => {
       theme: "light",
     });
   }
+  async function uploadMetadataToIPFS() {
+    const nftJSON = {
+      name: nft.NFTName,
+      description: nft.description,
+      image: nft.pinataurl,
+    };
 
+    try {
+      //upload the metadata JSON to IPFS
+      const response = await uploadJSONToIPFS(nftJSON);
+      if (response.success === true) {
+        console.log("Uploaded JSON to Pinata: ", response);
+        return response.pinataURL;
+      }
+    } catch (e) {
+      console.log("error uploading JSON metadata:", e);
+    }
+  }
   //blockchain part
   async function mintNFT() {
     //Upload data to IPFS
@@ -88,11 +106,11 @@ const Message = ({ notification }) => {
           pathname: "/nft/user",
         });
       }, "3000");
-      // alert("Successfully minted your NFT!");
+       alert("Successfully minted your NFT!");
 
       //window.location.replace("/")
     } catch (e) {
-      //  alert("Upload error" + e);
+        alert("Upload error" + e);
       notify("something went wrong!");
     }
   }

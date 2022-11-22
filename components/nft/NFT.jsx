@@ -197,10 +197,11 @@ const Nft = () => {
       updateNFTByNFTId(distpatch, newnft, nft._id);
        setloading(false);
       if (nft.listType == "Decreasing") {
-        // alert("Successfully minted your NFT!");
+       //  alert("Successfully minted your NFT!");
         notify("Successfully Buy the NFT from Decreasing Auction!");
-        //alert("Collection Created");
+     // alert("Collection Created");
       } else {
+       
         notify("Successfully Buy the NFT!");
       }
       setTimeout(() => {
@@ -210,6 +211,7 @@ const Nft = () => {
       }, "3000");
       //window.location.replace("/")
     } catch (e) {
+      //console.log(e)
       setloading(false);
       notify("something went wrong!");
     }
@@ -238,7 +240,7 @@ const Nft = () => {
         const curprice = getCurrentPriceForDecreasingAuction();
         newwPrice = curprice.toString().slice(0,5);
       }
-      console.log(newwPrice);
+    //  console.log(newwPrice);
       //massage the params to be sent to the create NFT request
       const price = ethers.utils.parseUnits(newwPrice, "ether");
 
@@ -272,6 +274,7 @@ const Nft = () => {
       }, "3000");
     } catch (e) {
       setloading(false);
+    //  alert("something went wrong!");
       notify("something went wrong!");
     }
   }
