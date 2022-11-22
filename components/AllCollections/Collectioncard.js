@@ -20,7 +20,7 @@ const Collectioncard = ({ collection, user }) => {
   return (
     <Link
       href={
-		if (currentUser && currentUser.access) {
+		if (currentUser && currentUser?.access) {
         user
           ? `/collection/user/${collection._id}`
           : `/collection/${collection._id}`
