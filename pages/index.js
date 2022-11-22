@@ -23,6 +23,7 @@ export default function Home() {
   //localStorage.clear();
   const currentUser = useSelector((state) => state.user?.currentUser?.access);
   console.log(currentUser)
+  
   return (
     <div className="bg-zinc-200">
          {currentUser==false && (

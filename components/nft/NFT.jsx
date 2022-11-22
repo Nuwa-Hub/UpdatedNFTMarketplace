@@ -164,10 +164,10 @@ const Nft = () => {
       let newwPrice = nft.price.toString();
       if (nft.listType == "Decreasing") {
         const curprice = getCurrentPriceForDecreasingAuction();
-        newwPrice = curprice.toString();
+        newwPrice = curprice.toString().slice(0,3);
       }
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits("0.1", "ether");
+      const price = ethers.utils.parseUnits(newwPrice, "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 
@@ -236,11 +236,11 @@ const Nft = () => {
       let newwPrice = nft.price.toString();
       if (nft.listType == "Decreasing") {
         const curprice = getCurrentPriceForDecreasingAuction();
-        newwPrice = curprice.toString();
+        newwPrice = curprice.toString().slice(0,5);
       }
       console.log(newwPrice);
       //massage the params to be sent to the create NFT request
-      const price = ethers.utils.parseUnits("0.06", "ether");
+      const price = ethers.utils.parseUnits(newwPrice, "ether");
 
       //run the executeSale function
       //let owner = await contract.withdraw()
@@ -280,10 +280,10 @@ const Nft = () => {
     e.preventDefault();
     //setBuy(true);
     if (nft.mint == true) {
-      //console.log("buy");
+      console.log("buy");
       await buyNFT();
     } else {
-      //console.log("mint");
+      console.log("mint");
       await mintNFT();
     }
   }

@@ -11,22 +11,31 @@ const Accordion_ = () => {
 	//get current NFT id
 	const router = useRouter();
 	const nft_id = router.query.id;
-	const [data, setdata] = useState([]);
+	const [data, setdata] = useState(false);
+	const [prices, setprices] = useState(false);
+	const [dates, setdates] = useState(false);
 	const [listing, setlisting] = useState([]);
-	let prices = [];
-	let dates = [];
 	useEffect(() => {
 		if (nft_id) {
 			publicRequest.get(`nft/price/${nft_id}`).then((res) => {
-				setdata(res.data);
+				if (res.data.length > 1) {
+					setdata(res.data);
+					setprices(res.data[0].map((item) => item.toString()));
+					setdates(res.data[1].map((item) => item.toString()));
+				}
 			});
-			publicRequest.get(`nft/listinghistory/${nft_id}`).then((res) => {
-				setlisting(res.data);
+			publicRequest.get(`nft/price/${nft_id}`).then((res) => {
+				setdata(res.data);
 			});
 		}
 	}, [nft_id]);
+	useEffect(() => {
+		if (data?.length > 1) {
+			setprices(data[0].map((item) => item.toString()));
+			setdates(data[1].map((item) => item.toString()));
+		}
+	}, [data]);
 
-	console.log(data);
 	return (
 		<div className="mt-10">
 			<div className="bg-white w-full border border-blue-300 divide-y divide-gray-200">
@@ -34,14 +43,14 @@ const Accordion_ = () => {
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full outline-none">
 						Price History
 					</summary>
-					<div className="p-4">
+					{data && (
 						<PriceHistoryLineChart
-							dates={data[1]}
-							prices={data[0]}
+							dates={dates}
+							prices={prices}
 						//	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
 						//	prices={["0.1", "0.2", "0.1"]}
 						/>
-					</div>
+					)}
 					{/* <PriceHistoryTable /> */}
 				</details>
 				<details>
@@ -51,11 +60,11 @@ const Accordion_ = () => {
 					<ListingTable data={listing} />
 				</details>
 				{/* <details>
-					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
-						Item Activity
-					</summary>
-					<ItemActivityTable />
-				</details> */}
+          <summary className="question py-3 px-4 cursor-pointer select-none w-full">
+            Item Activity
+          </summary>
+          <ItemActivityTable />
+        </details> */}
 			</div>
 
 			{/* <Accordion defaultActiveKey="0">

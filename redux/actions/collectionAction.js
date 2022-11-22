@@ -6,8 +6,8 @@ import {
   getCollectionSuccess,
 } from "redux/slices/collectionSlice";
 import { publicRequest, userRequest } from "utils/requestMethods";
-const BASE_URL = "http://localhost:3000/api/";
-
+//const BASE_URL = "http://localhost:3000/api/";
+const BASE_URL = "https://updated-nft-marketplace.vercel.app/api/";
 //add collection
 export const addCollections = async (dispatch, newCollection,token) => {
   try {

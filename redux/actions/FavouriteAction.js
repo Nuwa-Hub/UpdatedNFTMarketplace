@@ -1,7 +1,9 @@
 import {
   addfavouriteSuccess,
   getfavouritesSuccess,
+  getnotificationSuccess,
   removefavouriteSuccess,
+  removenotificationSuccess,
 } from "redux/slices/FavouriteSlice";
 
 import { publicRequest, userRequest } from "/utils/requestMethods";
@@ -30,5 +32,23 @@ export const getAllFavouritesByUserId = async (dispatch, userId) => {
   try {
     const res = await publicRequest.get(`/favourite/${userId}`);
     dispatch(getfavouritesSuccess(res.data));
+  } catch (err) {}
+}
+  //get all NFT
+export const getAllNotificationsByUserId = async (dispatch, userId) => {
+  try {
+    const res = await publicRequest.get(`/notification/${userId}`);
+    console.log(res.data)
+    dispatch(getnotificationSuccess(res.data));
+  } catch (err) {}
+};
+//delete NFT
+export const deleteNotification = async (dispatch, Id) => {
+  try {
+    const res = await publicRequest.delete(
+      `/notification/user/${Id}`
+    );
+    dispatch(removenotificationSuccess(Id));
+    console.log(res.data);
   } catch (err) {}
 };
