@@ -20,14 +20,12 @@ const Collectioncard = ({ collection, user }) => {
   return (
     <Link
       href={
-		if (currentUser && currentUser?.access) {
-        user
-          ? `/collection/user/${collection._id}`
-          : `/collection/${collection._id}`
+        currentUser && currentUser.access
+          ? user
+            ? `/collection/user/${collection._id}`
+            : `/collection/${collection._id}`
+          : "#"
       }
-	  else{
-		getBalance();
-	  }}
     >
       <div className="nft ">
         <div className="main flex flex-col p-4 w-full">
