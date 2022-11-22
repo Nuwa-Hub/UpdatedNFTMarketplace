@@ -271,6 +271,7 @@ const Navbar = () => {
               <CgProfile size={50} />
             </div>
           )}
+          {adminButton}
 
           <div>
             <ConnectWalletButton />
@@ -283,7 +284,6 @@ const Navbar = () => {
                 </Link>
               </li>
             ) : null} */}
-          {adminButton}
 
           {/* <li><Link to="platforms" smooth={true} offset={-100} duration={500}>Platforms</Link></li>
             <li><Link to="pricing" smooth={true} offset={-50} duration={500}>Pricing</Link></li> */}

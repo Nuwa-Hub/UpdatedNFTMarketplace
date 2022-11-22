@@ -3,12 +3,14 @@ import { useState } from "react";
 import { publicRequest } from "utils/requestMethods";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
+import { useRouter } from 'next/router'
 import * as Yup from "yup";
 
 const HighestBidModal = ({ closeBidNFT, auction }) => {
   const [bid, setBid] = useState(0);
   const [error, setError] = useState(false);
   const user = useSelector((state) => state.user.currentUser);
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
       bid: 0,
@@ -22,6 +24,7 @@ const HighestBidModal = ({ closeBidNFT, auction }) => {
         })
         .then((res) => {
           console.log(res);
+          router.reload()
         })
         .catch((err) => {
           console.log(err);

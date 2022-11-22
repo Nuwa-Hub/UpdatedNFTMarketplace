@@ -12,12 +12,16 @@ const Accordion_ = () => {
 	const router = useRouter();
 	const nft_id = router.query.id;
 	const [data, setdata] = useState([]);
+	const [listing, setlisting] = useState([]);
 	let prices = [];
 	let dates = [];
 	useEffect(() => {
 		if (nft_id) {
 			publicRequest.get(`nft/price/${nft_id}`).then((res) => {
 				setdata(res.data);
+			});
+			publicRequest.get(`nft/listinghistory/${nft_id}`).then((res) => {
+				setlisting(res.data);
 			});
 		}
 	}, [nft_id]);
@@ -34,8 +38,8 @@ const Accordion_ = () => {
 						<PriceHistoryLineChart
 							dates={data[1]}
 							prices={data[0]}
-							//	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
-							//	prices={["0.1", "0.2", "0.1"]}
+						//	dates={["2022/08/", "2022/08/03", "2022/08/03"]}
+						//	prices={["0.1", "0.2", "0.1"]}
 						/>
 					</div>
 					{/* <PriceHistoryTable /> */}
@@ -44,14 +48,14 @@ const Accordion_ = () => {
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
 						Listings
 					</summary>
-					<ListingTable />
+					<ListingTable data={listing} />
 				</details>
-				<details>
+				{/* <details>
 					<summary className="question py-3 px-4 cursor-pointer select-none w-full">
 						Item Activity
 					</summary>
 					<ItemActivityTable />
-				</details>
+				</details> */}
 			</div>
 
 			{/* <Accordion defaultActiveKey="0">

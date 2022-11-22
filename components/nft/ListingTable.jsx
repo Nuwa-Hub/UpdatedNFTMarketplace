@@ -1,4 +1,4 @@
-const ListingTable = () => {
+const ListingTable = ({ data }) => {
 	return (
 		<div>
 			<table className="min-w-full  leading-normal">
@@ -8,20 +8,20 @@ const ListingTable = () => {
 							Price
 						</th>
 						<th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-50 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
-							Expiration
+							Seller
 						</th>
 						<th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-50 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
-							From
+							Date
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{[1, 2, 3, 4].map((item, index) => {
+					{data.map((list) => {
 						return (
-							<tr key={item}>
-								<td className="text-center">0.5 ETH</td>
-								<td className="text-center">1 day</td>
-								<td className="text-center">0x123456789</td>
+							<tr key={list._id}>
+								<td className="text-center">{list.price} ETH</td>
+								<td className="text-center">{list.seller}</td>
+								<td className="text-center">{new Date(list.createdAt).toLocaleDateString()}</td>
 							</tr>
 						);
 					})}
