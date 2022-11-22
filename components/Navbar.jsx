@@ -138,7 +138,7 @@ const Navbar = () => {
           )}
         </form>
         <div className="hidden md:flex pr-4">
-          {currentUser ? (
+          {currentUser && currentUser?.access ? (
             <div className="relative group pr-12 pt-4 cursor-pointer">
               Explore
               <div className="absolute w-200 invisible group-hover:visible bg-gray-50 pt-4">
@@ -166,7 +166,7 @@ const Navbar = () => {
             <div
               className="relative group pr-12 pt-4 cursor-pointer"
               onClick={() => {
-                getBalance();
+                 getBalance();
               }}
             >
               Explore
@@ -177,7 +177,7 @@ const Navbar = () => {
 							<a>Explore Collections</a>
 						</Link>
 					</div> */}
-          {currentUser ? (
+          {currentUser && currentUser?.access ? (
             <div className="relative group pr-12 pt-4 cursor-pointer">
               Create
               <div className="absolute w-200 invisible group-hover:visible bg-gray-50 pt-4">
@@ -231,7 +231,7 @@ const Navbar = () => {
 							<a>Create Collection</a>
 						</Link>
 					</div> */}
-          {currentUser ? (
+          {currentUser && currentUser?.access ? (
             <div className="relative group pr-12">
               <CgProfile size={50} />
               <div className="absolute w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center top-1 left-10">
