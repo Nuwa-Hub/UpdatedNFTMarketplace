@@ -24,8 +24,8 @@ const Accordion_ = () => {
 					setdates(res.data[1].map((item) => item.toString()));
 				}
 			});
-			publicRequest.get(`nft/price/${nft_id}`).then((res) => {
-				setdata(res.data);
+			publicRequest.get(`nft/listinghistory/${nft_id}`).then((res) => {
+				setlisting(res.data);
 			});
 		}
 	}, [nft_id]);
