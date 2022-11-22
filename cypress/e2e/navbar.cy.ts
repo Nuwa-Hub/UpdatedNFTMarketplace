@@ -1,7 +1,17 @@
 describe('Create Collection', () => {
   it('connect wallet', () => {
     cy.visit('/')
-    cy.contains('connect wallet').click()
+    cy.get(':nth-child(4) > :nth-child(1) > .relative > .bg-indigo-600')
+  })
+  it('explorer', () => {
+    cy.visit('/')
+    cy.get('.px-2 > .hidden > :nth-child(1)')
+    cy.get('.px-2 > .hidden > :nth-child(1) > .absolute :nth-child(2)')
+  })
+  it('create', () => {
+    cy.visit('/')
+    cy.get('.px-2 > .hidden > :nth-child(2)')
+    cy.get('.px-2 > .hidden > :nth-child(2) > .absolute :nth-child(2)')
   })
 })
 

@@ -6,6 +6,7 @@ const NotificationSchema = new mongoose.Schema(
     userWalletAddress: { type: String, required: true },
     nft: { type: mongoose.Schema.Types.ObjectId, ref: 'NFT' },
     isRead: { type: Boolean, default: false },
+    value:{type:Number, default:0.05}
   },
   { timestamps: true }
 );

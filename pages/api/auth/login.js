@@ -26,6 +26,7 @@ export default async function handler(req, res) {
                 const { username, account } = user._doc;
                 user = { username, walletAdress: account };
                 user.isAdmin = true;
+                user.access = true;
                 return res.status(200).json({ user, userToken });
             }
             user = await User.findOne({ walletAdress: req.body.walletAdress });
