@@ -52,18 +52,26 @@ export default function NFTCard() {
 			setMostFavorite(false);
 			//get all NFTs that include to the relevent collection
 		} else if (fileter_id == 3) {
-			const collection_res = await publicRequest.get(
-				`/favourite/collection/${collection_id}`
+			// const collection_res = await publicRequest.get(
+			// 	`/favourite/collection/${collection_id}`
+			// );
+			// let final_arr = [];
+			// collection_res.data.forEach((nft) => {
+			// 	final_arr.push(nft.full_nft);
+			// });
+			// setFilterData(final_arr);
+			// setMostFavorite(true);
+			// setHighToLow(false);
+			// setLowToHigh(false);
+			//get all NFTs that include to the relevent collection
+			let cpy = [...nfts];
+			let sorted = cpy.sort(
+				(a, b) => parseFloat(b.visits) - parseFloat(a.visits)
 			);
-			let final_arr = [];
-			collection_res.data.forEach((nft) => {
-				final_arr.push(nft.full_nft);
-			});
-			setFilterData(final_arr);
+			setFilterData(sorted);
 			setMostFavorite(true);
 			setHighToLow(false);
 			setLowToHigh(false);
-			//get all NFTs that include to the relevent collection
 		}
 	};
 
@@ -141,13 +149,16 @@ export default function NFTCard() {
 								class="p-1 px-4 m-0.5 hover:text-blue-800 hover:border-blue-500 text-sm font-bold border-2 text-gray-600 border-gray-300 bg-white rounded-lg"
 							>
 								<span class="w-full flex align-middle">
-									Most Favourite
+									Most Visited
 								</span>
 							</button>
 						)}
 						{mostFavorite && (
 							<button
-								onClick={() => setMostFavorite(false)}
+								onClick={() => {
+									setMostFavorite(false);
+									setFilter(false);
+								}}
 								class="p-1 px-2 m-0.5 text-sm font-bold border-2 text-blue-800 border-blue-500 bg-white rounded-lg"
 							>
 								<span class="w-full inline-flex leading-4 align-middle">
@@ -158,7 +169,7 @@ export default function NFTCard() {
 									>
 										<path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
 									</svg>
-									Most Favourite
+									Most Visited
 								</span>
 							</button>
 						)}
